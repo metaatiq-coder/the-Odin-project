@@ -1,0 +1,89 @@
+### 1. Core Philosophy
+- Fonts performance ko bahut affect karte hain (FCP, LCP, CLS).
+- **Sabse fast font** woh hai jo download hi na ho (system fonts use karo jahan possible).
+- **Goal**: Jaldi text dikhao + layout shift kam ho + file size chhota.
+
+### 2. font-display Strategies (Sabse Important)
+
+| Value       | Block Period | Swap Period     | Best Use Case                          | Effect on Performance |
+|-------------|--------------|-----------------|----------------------------------------|-----------------------|
+| `auto`      | Browser dependent | Browser dependent | Avoid                                  | Unpredictable |
+| `block`     | ~3 seconds   | Infinite        | Critical branding text (agar early load) | Delays text rendering |
+| **`swap`**  | 0ms          | Infinite        | Headings / branding                    | Fast text, possible shift |
+| `fallback`  | 100ms        | 3 seconds       | Good balance                           | Moderate |
+| **`optional`** | 100ms     | None            | **Body text** (recommended)            | Best performance, no late swap |
+
+**Recommendation**:  
+- **Body text** → `font-display: optional;`  
+- **Headings / logo** → `font-display: swap;`
+
+### 3. @font-face Best Practices
+
+```css
+@font-face {
+  font-family: "MyFont";
+  src: url("/fonts/myfont.woff2") format("woff2");   /* Sirf WOFF2 */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;          /* Ya optional */
+  unicode-range: U+0000-00FF;  /* Latin only */
+}
+```
+
+**Must Follow Rules**:
+- **Sirf WOFF2** use karo (best compression, modern browsers mein kaafi).
+- `unicode-range` lagao taake sirf zaruri characters download hon.
+- `@font-face` ko `<head>` mein inline CSS mein daalo (critical fonts ke liye).
+- Multiple weights ke liye alag `@font-face` ya **Variable Fonts** use karo.
+
+### 4. Self-Hosting vs Third-Party (Google Fonts etc.)
+
+| Approach          | Pros                                      | Cons                                      | Recommendation |
+|-------------------|-------------------------------------------|-------------------------------------------|----------------|
+| **Self-Hosting**  | No extra connection, full control, faster with good CDN | Aapko subsetting manually karna padta hai | Best agar CDN + HTTP/2/3 hai |
+| **Third-Party**   | Automatic subsetting, easy                | Extra DNS connection, potential latency   | Use with `preconnect` |
+
+**Third-party ke liye**:
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+```
+
+### 5. Optimization Techniques (Performance Tips)
+
+| Technique              | Kya Karein?                                      | Fayda |
+|------------------------|--------------------------------------------------|-------|
+| **Subset Fonts**       | Sirf zaruri glyphs rakho (`unicode-range`)      | File size kaafi kam |
+| **Variable Fonts**     | Ek file mein multiple weights/styles            | Kam requests |
+| **Preload**            | Sirf critical font ke liye (sparingly)          | Early discovery |
+| **System Fonts**       | `system-ui`, `ui-sans-serif` etc. use karo      | Zero download |
+| **Minimize Fonts**     | Kam se kam fonts aur weights use karo           | Kam requests |
+| **Icon Fonts**         | Avoid — SVG use karo                            | Better accessibility + no CLS |
+
+### 6. Font Stack (Fallbacks)
+
+```css
+body {
+  font-family: "MyFont", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+```
+
+- Fallback fonts ko web font ke jitna possible matching rakho (size-adjust property modern mein help karti hai).
+- CLS (layout shift) se bachne ke liye fallback aur web font ka metrics close hona chahiye.
+
+### 7. Quick Do’s and Don’ts
+
+**Do**:
+- `font-display: optional` body text ke liye
+- WOFF2 only
+- `unicode-range` + subsetting
+- `preconnect` for third-party
+- Variable fonts jab multiple weights chahiye
+
+**Don’t**:
+- Icon fonts use karo (SVG better)
+- `preload` har font par
+- Purane formats (EOT, TTF, SVG) rakho
+- Bahut saare fonts/weights load karo
+
+**Modern Tip (2026)**: Variable fonts + WOFF2 + `optional`/`swap` + self-hosting = sabse balanced approach.

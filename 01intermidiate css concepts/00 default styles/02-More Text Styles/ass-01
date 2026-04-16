@@ -1,0 +1,132 @@
+### 1. Web Fonts — Basic Concepts
+
+- **Web-safe fonts** sirf limited hote hain (Arial, Helvetica, Georgia etc.).
+- **Web fonts** aap custom fonts download karwa sakte ho taake design consistent rahe.
+- Do main tareeke:
+  1. **Self-hosting** (@font-face rule)
+  2. **Third-party services** (Google Fonts, Adobe Fonts etc.)
+
+**Important**: Fonts ke licensing ka khayal rakho — free nahi hote sab.
+
+### 2. @font-face Rule (Self-Hosting)
+
+```css
+@font-face {
+  font-family: "MyCustomFont";     /* naam jo aap use karoge */
+  src: url("fonts/myfont.woff2") format("woff2"),
+       url("fonts/myfont.woff")  format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;              /* zaroori! */
+}
+```
+
+**Use karne ka tarika**:
+```css
+body {
+  font-family: "MyCustomFont", Arial, sans-serif;
+}
+```
+
+### 3. Font Formats (Order Important Hai)
+
+| Format   | Size     | Support                     | Recommendation |
+|----------|----------|-----------------------------|----------------|
+| **WOFF2** | Sabse chhota | Modern browsers (best)      | **Primary** — pehle likho |
+| **WOFF**  | Chhota   | Almost all (IE9+)           | Fallback |
+| **TTF/OTF** | Bada   | Good support                | Old browsers ke liye |
+| **EOT**   | —        | Sirf old IE                 | Legacy only |
+| **SVG**   | —        | Bahut purana                | Avoid |
+
+**Best Practice**: Hamesha `woff2` → `woff` → `ttf` order mein likho.
+
+### 4. font-display Property (Performance King)
+
+Yeh decide karta hai ki font load hone tak text kaise dikhe.
+
+| Value       | Matlab                                      | Kab Use Karein? |
+|-------------|---------------------------------------------|-----------------|
+| `auto`      | Browser decide karega                       | Default (avoid) |
+| `block`     | Invisible text (FOIT) — 3 sec tak wait     | Rarely |
+| **`swap`**  | Fallback font turant dikhao, phir custom swap | **Best for most cases** |
+| `fallback`  | Short wait, then fallback                   | Good compromise |
+| `optional`  | Agar slow hai to fallback hi rakho          | Performance critical sites |
+
+**Recommendation**: Har `@font-face` mein **`font-display: swap;`** lagao taake FOIT (Flash of Invisible Text) na ho.
+
+### 5. Multiple Weights & Styles
+
+Har weight/style ke liye alag `@font-face` likho:
+
+```css
+@font-face {
+  font-family: "MyFont";
+  src: url("myfont-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MyFont";
+  src: url("myfont-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+```
+
+Phir normal CSS mein:
+```css
+h1 { font-weight: 700; }
+```
+
+### 6. Variable Fonts (Modern & Efficient)
+
+Ek hi file mein bohot saare weights, widths, styles aa sakte hain.
+
+```css
+@font-face {
+  font-family: "MyVariableFont";
+  src: url("myfont-variable.woff2") format("woff2");
+  font-weight: 100 900;     /* range support */
+  font-style: normal;
+  font-display: swap;
+}
+```
+
+Use:
+```css
+font-variation-settings: "wght" 650;   /* weight control */
+```
+
+**Fayda**: File size chhota, performance better.
+
+### 7. Performance & Best Practices
+
+- **WOFF2** pehle rakho.
+- `unicode-range` use karo (sirf zaruri characters download ho):
+  ```css
+  unicode-range: U+0000-00FF;   /* Latin characters only */
+  ```
+- Self-hosting better control deta hai (Google Fonts se bhi).
+- Google Fonts ke liye `<link>` tag `<head>` mein daalo.
+- Font loading ko optimize karo (preload important fonts).
+- Body text ke liye readable fonts choose karo (decorative sirf headings ke liye).
+
+### 8. Quick Starter Template
+
+```css
+/* 1. @font-face */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2. Apply */
+:root {
+  font-family: "Inter", system-ui, sans-serif;
+}

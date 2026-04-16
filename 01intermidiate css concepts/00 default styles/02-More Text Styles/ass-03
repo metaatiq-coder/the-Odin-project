@@ -1,0 +1,94 @@
+### 1. Core Typography Principles
+
+- Typography sirf font choose karna nahi — **text size, line length, line height, aur spacing** sab important hain.
+- Text web par **responsive by default** hota hai (browser automatically wrap karta hai).
+- **User preferences** respect karo (browser zoom, text size settings).
+- **Hierarchy** banao taake important content turant dikhe.
+
+### 2. Choosing Fonts & Font Stacks
+
+| Approach              | Recommendation                                      | Code Example |
+|-----------------------|-----------------------------------------------------|--------------|
+| **System Fonts**      | Fastest (zero download)                             | `system-ui, -apple-system, sans-serif` |
+| **Web Fonts**         | `@font-face` + WOFF2 format                         | `@font-face { font-family: "Roboto"; src: url('roboto.woff2') format('woff2'); }` |
+| **Variable Fonts**    | Ek file mein multiple weights/styles                | Best jab 3+ weights chahiye |
+| **Fallback Stack**    | Web font + safe system fonts                        | `font-family: "MyFont", system-ui, sans-serif;` |
+
+**Performance Tip**: `font-display: swap;` ya `optional` use karo.
+
+### 3. Font Sizes & Responsive Scaling
+
+**Best Modern Methods**:
+
+```css
+/* Fluid + Safe Scaling */
+html {
+  font-size: clamp(1rem, 0.75rem + 1.5vw, 2rem);
+}
+
+/* Or with calc */
+html {
+  font-size: calc(0.75rem + 1.5vw);
+}
+```
+
+**Media Query Approach** (step-wise):
+```css
+@media (min-width: 30em) { html { font-size: 125%; } }
+@media (min-width: 40em) { html { font-size: 150%; } }
+/* ... up to larger screens */
+```
+
+**Hierarchy Tip**: Design system mein typography scale banao (small → medium → large).
+
+### 4. Line Length (Measure) — Sabse Important Readability Rule
+
+| Content Type          | Ideal Line Length          | CSS Property |
+|-----------------------|----------------------------|--------------|
+| Single column (body)  | **45–75 characters** (ideal 66) | `max-inline-size: 66ch;` |
+| Multiple columns      | 40–50 characters           | `max-inline-size: 45ch;` |
+| Blockquotes / narrow  | Shorter                    | `max-inline-size: 45ch;` |
+
+**Why `ch` unit?** → 1ch = width of "0" character (perfect for measuring text).
+
+### 5. Line Height & Spacing
+
+- `line-height` ko **unitless** rakho (e.g. `1.5`, `1.65`).
+- Chhoti lines ke liye thoda zyada line-height.
+- Lambi lines ke liye kam line-height (eye movement asaan rahe).
+
+**Example**:
+```css
+article {
+  max-inline-size: 66ch;
+  line-height: 1.65;
+}
+
+blockquote {
+  max-inline-size: 45ch;
+  line-height: 2;
+}
+```
+
+**Avoid**: Fixed `px` values jaise `line-height: 24px;`
+
+### 6. Font Loading & Performance Best Practices
+
+- **WOFF2** format sirf use karo.
+- Critical fonts ke liye `<link rel="preload" as="font" ...>` add karo.
+- `font-display: swap;` → text jaldi dikhe (system font se swap).
+- `font-display: optional;` → body text ke liye best (late swap nahi hota).
+
+### 7. Quick Typography Checklist
+
+| Check                          | Recommended |
+|--------------------------------|-------------|
+| Line length                    | 45–75ch     |
+| Line height                    | Unitless (1.5–1.8) |
+| Base font size                 | `clamp()` ya fluid `rem` + `vw` |
+| Font loading                   | `font-display: swap/optional` |
+| Variable fonts                 | Jab multiple weights chahiye |
+| User zoom / text resize        | Respect karo (rem use karo) |
+
+ Typography scale + `clamp()` + `max-inline-size: 66ch` = modern, readable, aur responsive text.
+
