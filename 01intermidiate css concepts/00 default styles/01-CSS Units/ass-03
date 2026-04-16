@@ -1,0 +1,85 @@
+### 1. Viewport Units — Basic Definition
+
+Viewport units browser window (viewport) ke size ke hisaab se calculate hote hain (parent element se nahi, jaise `%`).
+
+| Unit   | Matlab                                      | Example                  |
+|--------|---------------------------------------------|--------------------------|
+| `vw`   | 1% of viewport **width**                    | `50vw` = half screen width |
+| `vh`   | 1% of viewport **height**                   | `100vh` = full screen height |
+| `vmin` | 1% of **smaller** dimension (width or height) | Mobile portrait mein useful |
+| `vmax` | 1% of **larger** dimension                  | Landscape mein useful |
+
+**Note**: Yeh units kisi bhi length property mein use ho sakte hain (font-size, padding, margin, height, width etc.).
+
+### 2. Modern Viewport Units (2026 Update — Mobile Fix)
+
+Mobile browsers (Safari, Chrome) mein classic `vh` problem hota hai (address bar/toolbars ki wajah se overflow).
+
+| Unit   | Matlab (Mobile)                             | Best Use Case |
+|--------|---------------------------------------------|---------------|
+| `svh`  | **Small** viewport (toolbars visible)       | Hero sections, safe full height |
+| `lvh`  | **Large** viewport (toolbars hidden)        | Backgrounds, immersive sections |
+| `dvh`  | **Dynamic** (real-time update)              | Best for most mobile full-height (recommended) |
+
+**Recommendation (2026)**: Mobile projects mein `100dvh` ya `100svh` use karo instead of `100vh`.
+
+### 3. Fun & Creative Uses (Article ke Highlights)
+
+| Use Case                        | Code Example                                      | Kyun Cool Hai? |
+|---------------------------------|---------------------------------------------------|----------------|
+| **Fluid Typography**            | `font-size: calc(16px + 1vw);`                    | Text screen size ke saath gently grow karta hai |
+| **Full Height Sections**        | `min-height: 100vh;` or `min-height: 100dvh;`     | Hero, full-screen landing pages |
+| **Sticky Footer**               | `min-height: 100vh;`                              | Footer hamesha bottom par rahega |
+| **Fluid Aspect Ratio** (Video)  | `height: calc(100vw * 9 / 16);`                   | 16:9 ratio automatically maintain |
+| **Break Out of Container**      | `margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);` | Element full viewport width ban jaye (even agar parent constrained ho) |
+| **Proportional Scaling**        | `font-size: 5vmin;`                               | Text dono dimensions ke hisaab se scale (presentations ke liye best) |
+| **Creative Scroll Effect**      | Background size with `calc(100% - 100vh + ...)`   | Pure CSS scroll progress indicator |
+
+### 4. Practical Examples
+
+```css
+/* 1. Responsive Heading */
+h1 {
+  font-size: calc(2rem + 3vw);
+}
+
+/* 2. Full Screen Hero (Mobile Safe) */
+.hero {
+  min-height: 100dvh;           /* Modern best */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3. Fluid Video Container */
+.video-wrapper {
+  width: 100vw;
+  max-width: 1200px;
+  height: calc(100vw * 9 / 16);   /* 16:9 */
+}
+
+/* 4. Breakout Full Width */
+.full-bleed {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+```
+
+### 5. Important Gotchas & Tips
+
+- **Accessibility**: Sirf `vw`/`vh` se font-size mat banao — browser text zoom nahi karega. Hamesha `calc(16px + 1vw)` jaisa mix use karo.
+- **iOS Safari Problem**: Classic `100vh` address bar ke saath issue karta hai → `100dvh` ya `100svh` use karo.
+- `vmax` purane Edge/IE mein support nahi tha (ab mostly fine).
+- Performance: Bahut saare `calc()` heavy layouts mein careful use karo.
+- **Best Practice**: Typography ke liye `rem` + viewport mix, layout ke liye `dvh`/`vw`.
+
+### 6. Quick Decision Table
+
+| Situation                        | Recommended Unit          |
+|----------------------------------|---------------------------|
+| Font sizes                       | `calc(rem + vw)`          |
+| Full height hero / app           | `100dvh` or `100svh`      |
+| Aspect ratio (images/videos)     | `vw` + `calc()`           |
+| Full bleed / breakout sections   | `calc(50% - 50vw)`        |
+| Scaling inside square container  | `vmin`                    |
+| Desktop only                     | `vh` / `vw` fine          |

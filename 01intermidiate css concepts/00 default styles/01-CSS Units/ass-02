@@ -1,0 +1,76 @@
+### 1. Main CSS Units Comparison
+
+| Unit     | Type          | Relative To                          | Scales With User Font Size? | Best For                          | Cody’s Recommendation |
+|----------|---------------|--------------------------------------|-----------------------------|-----------------------------------|-----------------------|
+| **px**   | Absolute      | Fixed (CSS pixel ≈ 1/96 inch)        | No (sirf browser zoom se)   | Margins, padding, widths, heights, borders | **Yes** – spacing ke liye |
+| **em**   | Relative      | **Parent** element ka `font-size`    | Yes                         | Nested components (rare)          | **Avoid** – confusing |
+| **rem**  | Relative      | **Root** (`<html>`) ka `font-size`   | Yes                         | Font sizes, line-height           | **Yes** – fonts ke liye |
+
+### 2. Detailed Explanation
+
+- **px (Pixel)**  
+  Fixed size unit.  
+  Modern screens par actual physical pixel se thoda alag ho sakta hai (due to device pixel ratio).  
+  Browser zoom se scale hota hai, lekin user text size setting se nahi badalta.  
+  **Fayda**: Layout predictable rehta hai, spacing consistent.
+
+- **em**  
+  Parent element ke font-size ke hisaab se calculate hota hai.  
+  **Problem**: Nesting mein size compounding hota hai.  
+  Example:  
+  Parent `font-size: 2em` → Child `font-size: 2em` = 4× root size (bahut bada ho jata hai).  
+  Isliye debugging mushkil hoti hai.
+
+- **rem**  
+  Hamesha root (`<html>`) ke font-size se calculate hota hai.  
+  Poore document mein consistent rehta hai.  
+  User browser settings mein text size badhaye to sab text proportionally scale hota hai → **accessibility friendly**.
+
+### 3. Cody Loyd Ka Final Recommendation
+
+- **Font sizes, line-height** → `rem` use karo (accessibility ke liye).
+- **Margins, padding, width, height, borders** → `px` use karo (layout stable rahega).
+- **em** → Sirf tab use karo jab kisi specific component mein proportional scaling chahiye (bahut rare).
+
+**Visual Example Idea** (Cody ke CodePen jaisa):
+- rem-based padding → text badhne par spacing bhi barh jati hai (layout loose ho sakta hai).
+- px-based padding → text barhega lekin spacing fixed rahegi (better visual balance).
+
+### 4. Accessibility & Practical Tips
+
+- Relative units (`rem`) user ko browser mein text size badhane ki freedom dete hain.
+- Sirf `px` use karne par bhi browser zoom kaam karta hai, lekin dedicated text resize setting ke liye `rem` better.
+- Complex layouts mein units mix karne se overflow ya wrapping issues aa sakte hain → intentional raho.
+- Default root font-size (`16px`) ko touch mat karo agar zarurat na ho.
+
+**Modern Hybrid Suggestion (Cody + Current Best Practice)**:
+```css
+html {
+  font-size: 16px;           /* base */
+}
+
+body {
+  font-size: 1.125rem;       /* rem for text */
+  line-height: 1.5;
+}
+
+.card {
+  padding: 24px;             /* px for spacing */
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+```
+
+### 5. Quick Decision Table
+
+| Property Type          | Recommended Unit | Reason |
+|------------------------|------------------|--------|
+| Font-size              | `rem`            | Accessibility |
+| Line-height            | `rem`            | Scales nicely |
+| Margin / Padding       | `px`             | Consistent spacing |
+| Width / Height         | `px` or `%`      | Predictable layout |
+| Border-radius / Shadow | `px`             | Fixed look |
+
+Yeh article ka core message hai: **Overcomplicate mat karo**.  
+`rem` for typography + `px` for everything else = practical aur maintainable solution for most projects.
+
