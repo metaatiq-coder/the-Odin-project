@@ -1,0 +1,71 @@
+### 1. SVG Basics
+
+| Concept                  | Explanation |
+|--------------------------|-----------|
+| **SVG full form**        | Scalable Vector Graphics |
+| **Kya hai?**             | Vector-based image format (jaise shapes banane ke liye) |
+| **Fayda**                | Zoom karne par bhi sharp rehta hai, file size chhota, CSS aur JS se control kar sakte ho |
+| **Syntax**               | XML-based (HTML jaisa hi) |
+
+### 2. SVG ko HTML mein kaise add karein?
+
+| Method               | Code Example                                      | Kab use karein? |
+|----------------------|---------------------------------------------------|-----------------|
+| **Inline SVG** (Recommended) | `<svg width="200" height="200" viewBox="0 0 200 200"> ... </svg>` | Jab CSS/JS se animate ya style karna ho |
+| **External file**    | `<img src="icon.svg" alt="icon">`                 | Simple icons ke liye |
+| **Object / Embed**   | `<object data="image.svg" type="image/svg+xml"></object>` | Backup ke liye |
+
+**Tip**: Inline SVG best hai kyunki yeh DOM ka hissa banta hai.
+
+### 3. Coordinate System & ViewBox (Sabse Important)
+
+- Origin (0,0) **top-left** corner mein hota hai (HTML ke opposite nahi, yahan bhi top-left).
+- `viewBox="minX minY width height"` → Yeh SVG ka internal canvas define karta hai.
+- Example: `viewBox="0 0 100 100"` → 100×100 unit ka area.
+
+**Common viewBox values**:
+- `viewBox="0 0 200 200"` → Default size ke hisaab se
+- `viewBox="0 0 100 100"` → Scaling ke liye best
+
+**preserveAspectRatio** → "xMidYMid meet" (default, center mein rakhta hai aur aspect ratio maintain karta hai)
+
+### 4. Common SVG Elements (Shapes)
+
+| Element          | Attributes                                      | Example |
+|------------------|--------------------------------------------------|---------|
+| `<svg>`          | `width`, `height`, `viewBox`, `xmlns`           | `<svg width="200" height="200" viewBox="0 0 200 200">` |
+| `<rect>`         | `x`, `y`, `width`, `height`, `rx`, `ry` (rounded) | `<rect x="20" y="30" width="100" height="80" rx="10" />` |
+| `<circle>`       | `cx`, `cy`, `r` (radius)                        | `<circle cx="100" cy="100" r="50" />` |
+| `<ellipse>`      | `cx`, `cy`, `rx`, `ry`                          | `<ellipse cx="100" cy="100" rx="60" ry="30" />` |
+| `<line>`         | `x1,y1`, `x2,y2`                                | `<line x1="20" y1="20" x2="180" y2="100" />` |
+| `<polyline>`     | `points="x1,y1 x2,y2 ..."`                      | `<polyline points="20,20 50,100 100,30" />` |
+| `<polygon>`      | `points="x1,y1 x2,y2 ..."` (closed shape)       | `<polygon points="100,20 180,100 20,100" />` |
+| `<path>`         | `d="M x y L x y ..."` (sabse powerful)          | `<path d="M 10 10 L 100 100" />` |
+| `<text>`         | `x`, `y`, `font-size`, `text-anchor`            | `<text x="50" y="50" font-size="20">Hello</text>` |
+| `<g>` (Group)    | Elements ko group karne ke liye                 | `<g> <rect/> <circle/> </g>` |
+
+### 5. Important Attributes (Styling)
+
+| Attribute          | Matlab                                      | Example |
+|--------------------|---------------------------------------------|---------|
+| `fill`             | Shape ka andar ka color                     | `fill="hotpink"` or `fill="#ff69b4"` |
+| `stroke`           | Border color                                | `stroke="black"` |
+| `stroke-width`     | Border ki thickness                         | `stroke-width="8"` |
+| `stroke-linecap`   | Line ke ends (round, butt, square)          | `stroke-linecap="round"` |
+| `opacity`          | Transparency (0 to 1)                       | `opacity="0.7"` |
+| `transform`        | Rotate, scale, translate                    | `transform="rotate(45 100 100)"` |
+
+### 6. Quick Tips (Josh Comeau style)
+
+- Hamesha `viewBox` add karo taake SVG responsive bane.
+- Width aur height CSS se bhi set kar sakte ho (`width: 100%`).
+- `<g>` tag use karo grouping aur common styles ke liye.
+- Path (`d` attribute) sabse zyada powerful hai complex shapes ke liye.
+- Inline SVG par CSS apply kar sakte ho jaise normal HTML elements.
+
+**Basic Starter Template**:
+```svg
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f0f0f0"/>
+  <circle cx="150" cy="100" r="60" fill="#ff6b6b"/>
+</svg>
