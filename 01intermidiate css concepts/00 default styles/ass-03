@@ -1,0 +1,82 @@
+### 1. Complete Josh Comeau Custom CSS Reset (Copy-Paste Ready)
+
+```css
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+#root, #__next {   /* Apne project ke root element ke hisaab se change karo */
+  isolation: isolate;
+}
+```
+
+### 2. Har Rule Ka Simple Explanation
+
+| Rule / Group                          | Kya Karta Hai?                                                                 | Kyun Zaroori Hai? |
+|---------------------------------------|--------------------------------------------------------------------------------|-------------------|
+| `*, *::before, *::after { box-sizing: border-box; }` | Width/height mein padding + border include karta hai                          | No unexpected overflow, predictable layout |
+| `*:not(dialog) { margin: 0; }`        | Default margins hata deta hai (except dialog)                                  | Aap khud spacing control kar sako |
+| `interpolate-size: allow-keywords` (with media query) | `height: 0` se `height: auto` smooth animate karne deta hai                   | Accordion, dropdowns etc. ke liye modern animation |
+| `body { line-height: 1.5; }`          | Text lines ke beech better spacing                                             | Readability badhti hai (dyslexia friendly) |
+| `-webkit-font-smoothing: antialiased` | macOS par text ko sharp aur clean banata hai                                   | Better text rendering on Apple devices |
+| `img, picture, video, canvas, svg { display: block; max-width: 100%; }` | Media elements ko block banao + container se bahar na jaye                   | No unwanted gaps, responsive by default |
+| `input, button, textarea, select { font: inherit; }` | Form controls parent ka font use karein                                        | Consistent typography, no mobile zoom |
+| `overflow-wrap: break-word`           | Lamba text (URLs, codes) container se bahar na jaye                            | Prevents horizontal scroll |
+| `text-wrap: pretty` (on p)            | Paragraphs ka last line better balance karta hai                               | Clean aur professional look |
+| `text-wrap: balance` (on headings)    | Headings ke lines equal length mein wrap karein                                | Headings visually balanced lagte hain |
+| `isolation: isolate` (on #root)       | Root element par naya stacking context banata hai                              | Modals, tooltips, popovers ka z-index easy ho jata hai |
+
+### 3. Quick Tips from Josh
+
+- Yeh reset **unopinionated** hai — design ke baare mein kuch nahi kehta, sirf baseline fix karta hai.
+- Apne framework ke hisaab se root selector change karo (`#root`, `#__next`, `.app` etc.).
+- Treat this as **starting point** — apne project ke hisaab se modify kar sakte ho.
+- `prefers-reduced-motion` respect karta hai accessibility ke liye.
+- New CSS features (`text-wrap`, `interpolate-size`) progressive enhancement hain.
+
+### 4. Comparison with Previous Resets (Aapke Series ke Hisaab Se)
+
+- **Eric Meyer Reset** → Bahut aggressive (sab zero).
+- **Normalize.css** → Gentle, defaults preserve karta hai.
+- **Matt Brictson Hybrid** → Similar direction.
+- **Josh Comeau** → Sabse modern + thoughtful (2026 tak updated) — readability + new CSS properties focus.

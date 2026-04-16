@@ -1,0 +1,74 @@
+### 1. Reset vs Reboot vs Normalize — Quick Comparison
+
+| Feature                  | **CSS Reset** (e.g. Eric Meyer) | **Normalize.css**                  | **CSS Reboot** (Bootstrap)              |
+|--------------------------|----------------------------------|------------------------------------|-----------------------------------------|
+| **Philosophy**           | Aggressive: Sab kuch zero kar do | Gentle: Sirf inconsistencies fix karo | Opinionated baseline + Normalize        |
+| **Approach**             | Almost everything `margin:0; padding:0;` etc. | Preserve useful defaults, fix differences | Normalize + minimal useful styles       |
+| **Selectors**            | Broad ( `*`, many elements)     | Element-specific                   | Only element selectors (no classes)     |
+| **Goal**                 | Start from complete blank slate | Make browsers consistent           | Elegant, consistent starting point      |
+| **Size**                 | Heavy                            | Medium                             | Lightweight + purposeful                |
+| **Best For**             | Full control from zero           | Most projects                      | Bootstrap projects or modern baselines  |
+| **Current Status (2026)**| Still used but old               | Very popular (v8+ available)       | Good for component libraries            |
+
+### 2. Why Do We Need Reset / Reboot?
+
+- Browsers ke default styles **alag-alag** hote hain (Chrome vs Firefox vs Safari).
+- Examples: `<button>` ka padding, `<h1>` ka font-size & margin, lists ka `list-style`, tables ka border etc.
+- Bina reset ke har project mein extra overrides likhne padte hain.
+- Solution: Ek consistent **baseline** banao taake aap design par focus kar sako.
+
+### 3. Popular Resets in History
+
+| Reset Name                  | Year   | Key Feature                              | Style Type      |
+|-----------------------------|--------|------------------------------------------|-----------------|
+| undohtml.css (Tantek Çelik) | 2004   | Early undo of defaults                   | Aggressive      |
+| Eric Meyer’s Reset          | 2007   | Sabse famous — almost everything zero    | Very Aggressive |
+| HTML5 Reset                 | ~2010  | Added `display:block` for new HTML5 tags | Aggressive      |
+| Normalize.css               | 2012+  | Smart normalization (not zeroing)        | Gentle          |
+| Bootstrap Reboot            | 2015+  | Normalize + opinionated styles           | Modern Reboot   |
+
+**Eric Meyer’s Reset** ka classic part:
+```css
+html, body, div, h1, h2, p, ul, li, table, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+```
+
+### 4. Common Rules in Modern Reboots / Resets
+
+| Category              | Common Rules                                      | Reason |
+|-----------------------|---------------------------------------------------|--------|
+| **Box Sizing**        | `* { box-sizing: border-box; }`                   | Width/height mein padding+border include ho |
+| **Body**              | `body { margin: 0; line-height: 1.5; }`           | Remove default margin, better readability |
+| **Headings**          | `h1, h2, h3... { margin: 0; font-size: inherit; }` or partial | Avoid huge default sizes |
+| **Lists**             | `ul, ol { padding-left: 0; list-style: none; }`   | Clean lists (bullets remove) |
+| **Tables**            | `table { border-collapse: collapse; }`<br>`caption { text-align: left; }` | No double borders, better caption |
+| **Forms**             | `button, input { font-family: inherit; }`         | Consistent font |
+| **Images**            | `img { max-width: 100%; height: auto; }`          | Responsive images |
+| **Selection**         | `::selection { background: #b3d4fc; }`            | Nice highlight |
+| **HTML5 Elements**    | `article, section, nav { display: block; }`       | Old browser support (ab kam zaruri) |
+
+### 5. Modern Recommendations (2026)
+
+- **Sabse best approach**: **Normalize.css** + thodi si custom reboot rules.
+- Ya popular modern custom resets use karo:
+  - Josh Comeau’s Custom CSS Reset
+  - Andy Bell’s Modern Reset
+  - Elad Shechter’s New CSS Reset
+- **Global** `* { box-sizing: border-box; }` almost har project mein daal do.
+- Agar Bootstrap use kar rahe ho → Unka **Reboot** already best hai.
+- Aaj kal heavy Eric Meyer reset kam log use karte hain kyunki browsers bahut consistent ho gaye hain.
+
+**Pro Tip**: Reset ko alag file mein rakho (`reset.css` ya `@layer base`) taake specificity issues na hon.
+
+### 6. Quick Decision Guide
+
+- **Zero se start karna hai** → Eric Meyer style Reset
+- **Consistency chahiye without losing useful defaults** → Normalize.css
+- **Opinionated but clean baseline** → Bootstrap Reboot ya custom modern reset
+- **Minimal & fast** → Sirf box-sizing + body margin + img responsive
