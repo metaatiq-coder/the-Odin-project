@@ -1,0 +1,33 @@
+### Complex Selectors Cheat Sheet (Shay Howe)
+
+| Group                      | Selector Example                  | Simple Explanation (Kya Karta Hai)                                      | Example Use Case                          |
+|----------------------------|-----------------------------------|-------------------------------------------------------------------------|-------------------------------------------|
+| **Common Selectors**      | `h1`                              | HTML tag ke hisaab se select karta hai                                  | All headings                              |
+| **Common Selectors**      | `.tagline`                        | Class attribute wale elements                                           | Reusable styles (buttons, alerts)         |
+| **Common Selectors**      | `#intro`                          | Unique ID wala element (sirf ek page pe)                                | Header, hero section                      |
+| **Child Selectors**       | `article h2`                      | Article ke andar kahin bhi h2 (kitna bhi andar ho)                      | Descendant Selector (space)               |
+| **Child Selectors**       | `article > p`                     | Sirf article ke **direct** children paragraphs                          | Direct Child Selector (>)                 |
+| **Sibling Selectors**     | `h2 ~ p`                          | h2 ke baad wale **sab** paragraphs (same parent mein)                   | General Sibling Selector (~)              |
+| **Sibling Selectors**     | `h2 + p`                          | h2 ke **turant** baad wala paragraph (sirf next sibling)                | Adjacent Sibling Selector (+)             |
+| **Attribute Selectors**   | `a[target]`                       | Jo bhi element mein "target" attribute ho                               | Attribute Present                         |
+| **Attribute Selectors**   | `a[href="https://google.com"]`    | href ka exact value match kare                                          | Attribute Equals (=)                      |
+| **Attribute Selectors**   | `a[href*="google"]`               | href mein kahin bhi "google" ho                                         | Contains (*)                              |
+| **Attribute Selectors**   | `a[href^="https://"]`             | href "https://" se shuru ho                                             | Begins with (^)                           |
+| **Attribute Selectors**   | `a[href$=".pdf"]`                 | href ".pdf" pe khatam ho                                                | Ends with ($)                             |
+| **Attribute Selectors**   | `a[rel~="tag"]`                   | rel attribute mein whitespace separated "tag" ho                        | Spaced (~)                                |
+| **Attribute Selectors**   | `a[lang|="en"]`                   | lang "en" se shuru ho (hyphen separated)                                | Hyphenated (|)                            |
+
+### Pseudo-Classes & Pseudo-Elements (Important Part)
+
+| Type                       | Selector Example                     | Simple Explanation                                                      | Common Use                               |
+|----------------------------|--------------------------------------|-------------------------------------------------------------------------|------------------------------------------|
+| **Structural Pseudo**     | `:first-child`                       | Group ka pehla child                                                    | First item in list                       |
+| **Structural Pseudo**     | `:last-child`                        | Group ka aakhri child                                                   | Last item in list                        |
+| **Structural Pseudo**     | `:nth-child(2)`                      | 2nd child (number, odd, even, 2n+1 etc.)                                | Zebra striping (even/odd rows)           |
+| **Structural Pseudo**     | `:nth-of-type(3)`                    | 3rd element of same type                                                | 3rd paragraph                            |
+| **State Pseudo**          | `:hover`                             | Mouse hover karne pe                                                    | Buttons, links                           |
+| **State Pseudo**          | `:focus`                             | Element focused ho (click ya tab)                                       | Input fields                             |
+| **State Pseudo**          | `:checked`                           | Checkbox/radio checked ho                                               | Custom toggles                           |
+| **Pseudo Elements**       | `::before`                           | Element ke shuru mein content add karta hai                             | Icons, quotes                            |
+| **Pseudo Elements**       | `::after`                            | Element ke end mein content add karta hai                               | Clearfix, arrows                         |
+| **Negation**              | `:not(.highlight)`                   | Jo .highlight class na ho                                               | Exclude some items                       |

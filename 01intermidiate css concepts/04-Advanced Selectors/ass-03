@@ -1,0 +1,19 @@
+### MDN Selectors Test Your Skills – Cheat Sheet
+
+| Challenge       | Task (Kya Karna Hai)                                                                 | Best Selector / CSS Rule                                      | Concept Tested                          |
+|-----------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------|-----------------------------------------|
+| **Selectors 1** | 1. Sab `<h1>` headings ko blue color do                                           | `h1 { color: blue; }`                                        | Element (Type) Selector                |
+| **Selectors 1** | 2. Sab `<h2>` headings ko blue background + white text do                         | `h2 { background-color: blue; color: white; }`               | Element Selector                       |
+| **Selectors 1** | 3. `<span>` ke andar text ka font-size 200% kar do                                | `span { font-size: 200%; }`                                  | Element Selector                       |
+| **Selectors 2** | 1. `id="special"` wale element ko yellow background do                            | `#special { background-color: yellow; }`                     | ID Selector                            |
+| **Selectors 2** | 2. `.alert` class wale elements ko 2px solid grey border do                       | `.alert { border: 2px solid grey; }`                         | Class Selector                         |
+| **Selectors 2** | 3. `.alert` + `.stop` dono classes wale ko red background do                      | `.alert.stop { background-color: red; }`                     | Multiple Class Selector                |
+| **Selectors 2** | 4. `.alert` + `.go` dono classes wale ko green background do                      | `.alert.go { background-color: green; }`                     | Multiple Class Selector                |
+| **Selectors 3** | 1. Normal links orange, visited links green, hover pe underline hata do           | `a:link { color: orange; }`<br>`a:visited { color: green; }`<br>`a:hover { text-decoration: none; }` | Pseudo-classes (`:link`, `:visited`, `:hover`) |
+| **Selectors 3** | 2. `.container` ke andar pehle `<p>` ka font-size 150% aur uski first line red    | `.container p:first-child { font-size: 150%; }`<br>`.container p:first-child::first-line { color: red; }` | `:first-child` + `::first-line`        |
+| **Selectors 3** | 3. Table ke har dusre row (`even`) ko dark background (#333) + white text         | `tr:nth-child(even) { background-color: #333333; color: white; }` | `:nth-child(even)`                     |
+| **Selectors 4** | 1. Har `<h2>` ke **turant** baad wale `<p>` ko red color do                       | `h2 + p { color: red; }`                                     | Adjacent Sibling (`+`)                 |
+| **Selectors 4** | 2. `.list` class wali `<ul>` ke direct `<li>` children ke:<br>• Bullets hatao<br>• 1px grey bottom border do | `ul.list > li { list-style: none; border-bottom: 1px solid grey; }` | Child Selector (`>`)                   |
+| **Selectors 5** | 1. Jo `<a>` mein `title` attribute ho, uska border pink do                        | `a[title] { border-color: pink; }`                           | Attribute Selector `[title]`           |
+| **Selectors 5** | 2. Jo `<a>` ke `href` mein kahin bhi "contact" ho, uska border orange do          | `a[href*="contact"] { border-color: orange; }`               | Attribute Contains (`*=`)              |
+| **Selectors 5** | 3. Jo `<a>` ke `href` "https" se shuru ho, uska border green do                   | `a[href^="https"] { border-color: green; }`                  | Attribute Starts with (`^=`)           |

@@ -1,0 +1,36 @@
+### CSS Diner Cheat Sheet (Levels 1 to 32)
+
+| Level | Selector                          | Kya Select Karta Hai (Simple Explanation)                          | Concept Taught                          |
+|-------|-----------------------------------|--------------------------------------------------------------------|-----------------------------------------|
+| 1     | `plate`                           | Sab plates                                 | Type Selector (Tag)                    |
+| 2     | `bento`                           | Sab bento boxes                            | Type Selector                          |
+| 3     | `#fancy`                          | ID "fancy" wala element                    | ID Selector (#)                        |
+| 4     | `plate apple`                     | Plate ke andar wale apples                 | Descendant Selector (space)            |
+| 5     | `#fancy pickle`                   | Fancy ID ke andar pickle                   | Descendant + ID                        |
+| 6     | `.small`                          | Sab chhote (.small class) items            | Class Selector (.)                     |
+| 7     | `orange.small`                    | Orange jo .small class bhi ho              | Combine Tag + Class                    |
+| 8     | `bento orange.small`              | Bento ke andar orange jo small ho          | Descendant + Tag + Class               |
+| 9     | `plate, bento`                    | Sab plates aur sab bentos                  | Group Selector (comma ,)               |
+| 10    | `*`                               | Sab kuch (universal)                       | Universal Selector (*)                 |
+| 11    | `plate *`                         | Plate ke andar ki sab cheezein              | Universal inside element               |
+| 12    | `plate + apple`                   | Plate ke turant baad wala apple            | Adjacent Sibling (+)                   |
+| 13    | `bento ~ pickle`                  | Bento ke baad wale sab pickles             | General Sibling (~)                    |
+| 14    | `plate > apple`                   | Sirf plate ke direct children apples       | Child Selector (>)                     |
+| 15    | `orange:first-child`              | Har group ka pehla orange                  | :first-child                           |
+| 16    | `plate :only-child`               | Plate mein jo akela child ho               | :only-child                            |
+| 17    | `.small:last-child`               | Har group ka aakhri .small item            | :last-child                            |
+| 18    | `plate:nth-child(2)`              | 2nd child jo plate ho                      | :nth-child()                           |
+| 19    | `plate:nth-last-child(2)`         | Aakhri se 2nd child jo plate ho            | :nth-last-child()                      |
+| 20    | `apple:first-of-type`             | Har group ka pehla apple (type wise)       | :first-of-type                         |
+| 21    | `plate:nth-of-type(2)`            | 2nd plate (type wise)                      | :nth-of-type()                         |
+| 22    | `plate:nth-of-type(2n+1)`         | Har odd number wala plate                  | :nth-of-type(An+B)                     |
+| 23    | `bento :only-of-type`             | Bento mein jo akela type ho                | :only-of-type                          |
+| 24    | `.small:last-of-type`             | Har group ka aakhri .small                 | :last-of-type                          |
+| 25    | `:empty`                          | Khali elements (kuch nahi andar)           | :empty                                 |
+| 26    | `plate :not(.small)`              | Plate ke andar jo .small na ho             | :not(X)                                |
+| 27    | `[for]`                           | Sab elements jinke paas "for" attribute ho | Attribute Selector                     |
+| 28    | `plate[for]`                      | Plate jo "for" attribute rakhta ho         | Tag + Attribute                        |
+| 29    | `[for="yellow"]`                  | for="yellow" wale elements                 | [attribute="value"]                    |
+| 30    | `[for^="yellow"]`                 | for attribute jo "yellow" se shuru ho      | [attribute^="value"] (starts with)     |
+| 31    | `[for$="pickle"]`                 | for attribute jo "pickle" pe khatam ho     | [attribute$="value"] (ends with)       |
+| 32    | `[for*="orange"]`                 | for attribute mein kahin bhi "orange" ho   | [attribute*="value"] (contains)        |
