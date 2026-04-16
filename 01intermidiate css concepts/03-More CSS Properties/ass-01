@@ -1,0 +1,90 @@
+### 1. Background Shorthand Overview
+
+`background` ek **shorthand** property hai jo ek hi line mein sab background-related properties set kar deti hai.
+
+**Syntax**:
+```css
+background: [background-image] [position] / [size] [repeat] [attachment] [origin] [clip] [color];
+```
+
+- Multiple layers comma (`,`) se separate karo.
+- Pehli layer top par hoti hai.
+- `background-color` sirf **last layer** mein likh sakte ho.
+
+### 2. Shorthand Components (Order Matters)
+
+| Component              | Possible Values                                      | Default Value     | Notes |
+|------------------------|------------------------------------------------------|-------------------|-------|
+| `background-image`     | `url(...)`, `none`, `linear-gradient()` etc.         | `none`            | Image ya gradient |
+| `background-position`  | `center`, `top left`, `50% 50%`, `10px 20px`         | `0% 0%`           | X Y axis |
+| `/ background-size`    | `cover`, `contain`, `auto`, `100px 200px`            | `auto`            | Position ke baad `/` ke saath |
+| `background-repeat`    | `repeat`, `no-repeat`, `repeat-x`, `space`, `round`  | `repeat`          | — |
+| `background-attachment`| `scroll`, `fixed`, `local`                           | `scroll`          | Scroll behavior |
+| `background-origin`    | `border-box`, `padding-box`, `content-box`           | `padding-box`     | Origin box |
+| `background-clip`      | `border-box`, `padding-box`, `content-box`, `text`   | `border-box`      | Clipping area |
+| `background-color`     | Any color (`#fff`, `rgb()`, `transparent`)           | `transparent`     | Sirf last layer mein |
+
+**Recommended Clear Order** (yaad rakhne ke liye):
+```css
+background: url(image.jpg) center / cover no-repeat fixed padding-box border-box #f0f0f0;
+```
+
+### 3. Individual Background Properties
+
+| Property                    | Short Description                                      | Common Values |
+|-----------------------------|--------------------------------------------------------|---------------|
+| `background-color`          | Background ka solid color                              | `transparent`, `#hex`, `rgb()` |
+| `background-image`          | Background image ya gradient                           | `url()`, `linear-gradient()` |
+| `background-position`       | Image ki position                                      | `center`, `top`, `left 20px` |
+| `background-size`           | Image ka size                                          | `cover`, `contain`, `100% auto` |
+| `background-repeat`         | Image repeat kaise ho                                  | `no-repeat`, `repeat-x` |
+| `background-attachment`     | Image scroll kare ya fixed rahe                        | `fixed`, `local` |
+| `background-origin`         | Background image ka starting box                       | `padding-box` |
+| `background-clip`           | Background kahan tak paint ho (clipping)               | `border-box`, `text` |
+
+### 4. Common Useful Examples
+
+```css
+/* 1. Simple solid color */
+background: #3498db;
+
+/* 2. Image with cover + no repeat */
+background: url('hero.jpg') center / cover no-repeat;
+
+/* 3. Gradient */
+background: linear-gradient(to right, #ff6b6b, #4ecdc4);
+
+/* 4. Multiple layers */
+background: 
+  url('pattern.png') top left / 50px repeat,
+  linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+  #222;
+
+/* 5. Modern hero section */
+.hero {
+  background: url('bg.jpg') center / cover no-repeat fixed;
+  background-color: #111;
+}
+```
+
+### 5. Important Notes & Best Practices
+
+- `background-size` hamesha `background-position` ke **turant baad** `/` ke saath aata hai.
+- Multiple backgrounds mein pehli wali top layer hoti hai.
+- `background-clip: text` → text ke andar background dikhta hai (colorful text ke liye).
+- Performance: Bahut saare heavy background images avoid karo.
+- Accessibility: Background images screen readers ko nahi dikhte — important info text mein rakho.
+- Default box: `background-origin: padding-box` aur `background-clip: border-box`.
+
+**Pro Tip**: Shorthand mein sirf zaruri values likho. Baaki defaults automatically lag jaate hain.
+
+### 6. Quick Decision Table
+
+| Need                          | Recommended Shorthand |
+|-------------------------------|-----------------------|
+| Solid color                   | `background: #color;` |
+| Full cover image              | `background: url() center/cover no-repeat;` |
+| Fixed parallax background     | `background: url() center/cover no-repeat fixed;` |
+| Gradient + image              | Multiple layers with comma |
+| Text with background color    | `background-clip: text;` + color |
+

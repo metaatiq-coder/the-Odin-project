@@ -1,0 +1,118 @@
+### 1. `border` Shorthand Property
+
+`border` ek shorthand hai jo **width**, **style**, aur **color** ko ek saath set karta hai.
+
+**Syntax**:
+```css
+border: <width> || <style> || <color>;
+```
+
+- Values ka order matter **nahi** karta.
+- 1, 2, ya 3 values de sakte ho.
+- Jo value omit karoge, uska default use hoga.
+
+**Common Examples**:
+```css
+border: solid;                    /* style only */
+border: 2px dotted;               /* width + style */
+border: 3px solid #3498db;        /* width + style + color */
+border: medium dashed green;
+border: 4px outset rgb(255 0 0 / 0.7);
+```
+
+**Zaroori Note**: Agar `border-style` nahi diya to border **invisible** rahega (default `none`).
+
+### 2. Individual Border Properties
+
+| Property           | Matlab                                      | Common Values |
+|--------------------|---------------------------------------------|---------------|
+| `border-width`     | Border ki thickness                         | `thin`, `medium` (default), `thick`, `1px`, `0.5rem` |
+| `border-style`     | Border ka look (sabse important)            | `none` (default), `solid`, `dashed`, `dotted`, `double`, `groove`, `ridge`, `inset`, `outset` |
+| `border-color`     | Border ka rang                              | Any color (`#hex`, `rgb()`, `currentColor`) |
+
+**Defaults**:
+- `border-width`: `medium`
+- `border-style`: `none` (isliye border dikhne ke liye style dena zaroori hai)
+- `border-color`: `currentColor` (text ka color)
+
+### 3. Border Style Values (Sabse Zyada Use Hone Wale)
+
+| Style       | Description                  | Visual Look |
+|-------------|------------------------------|-------------|
+| `none`      | Koi border nahi              | Invisible |
+| `hidden`    | None jaisa (tables mein special) | Invisible |
+| `solid`     | Solid line                   | Straight |
+| `dashed`    | Dashed line                  | - - - - |
+| `dotted`    | Dotted line                  | • • • • |
+| `double`    | Do parallel lines            | = = |
+| `groove`    | 3D grooved (sunken)          | 3D effect |
+| `ridge`     | 3D ridged (raised)           | 3D effect |
+| `inset`     | 3D inset                     | Pressed in |
+| `outset`    | 3D outset                    | Raised out |
+
+### 4. Side-Specific Borders
+
+Sabhi sides alag-alag set karne ke liye:
+
+- `border-top`
+- `border-right`
+- `border-bottom`
+- `border-left`
+
+**Logical Properties** (RTL languages ke liye best):
+- `border-block-start` / `border-block-end`
+- `border-inline-start` / `border-inline-end`
+
+**Example**:
+```css
+border-top: 2px solid red;
+border-bottom: 4px dashed #333;
+```
+
+### 5. `border-radius` (Rounded Corners)
+
+```css
+border-radius: 10px;                    /* sab corners same */
+border-radius: 10px 20px;               /* top-left/right, bottom-left/right */
+border-radius: 5px 10px 15px 20px;      /* top-left, top-right, bottom-right, bottom-left */
+```
+
+- Values: `<length>` ya `<percentage>`
+- `%` use karo circle/oval banane ke liye.
+
+### 6. Quick Useful Examples
+
+```css
+/* Card style */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+/* Button with hover */
+button {
+  border: 2px solid currentColor;
+  border-radius: 9999px;   /* pill shape */
+}
+
+/* Only bottom border (underline) */
+.underline {
+  border-bottom: 3px solid #0066ff;
+}
+
+/* Multiple sides different */
+.box {
+  border: 1px solid black;
+  border-top: 5px solid red;
+}
+```
+
+### 7. Best Practices & Gotchas
+
+- Hamesha `border-style` define karo, warna border dikhayi nahi degi.
+- `currentColor` use karo taake border text ke color se match kare.
+- Responsive design mein `rem` ya `px` prefer karo `border-width` ke liye.
+- `border` shorthand sab sides par same effect deta hai. Alag sides ke liye longhand use karo.
+- `border` vs `outline`:
+  - `border` → layout affect karta hai (space leta hai)
+  - `outline` → layout affect **nahi** karta (focus rings ke liye best)

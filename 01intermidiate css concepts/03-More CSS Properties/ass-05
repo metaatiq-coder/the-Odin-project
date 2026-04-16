@@ -1,0 +1,94 @@
+### 1. `overflow` Shorthand Property
+
+`overflow` ek shorthand hai jo **x** aur **y** dono directions mein overflow control karta hai.
+
+**Syntax**:
+```css
+overflow: <overflow-x> <overflow-y>;
+```
+
+Agar sirf ek value diya to dono directions mein same apply hota hai.
+
+### 2. Overflow Values
+
+| Value          | Matlab (Kya Hota Hai?)                                                                 | Common Use Case |
+|----------------|----------------------------------------------------------------------------------------|-----------------|
+| **`visible`**  | Default. Content box se bahar nikal sakta hai (overflow dikhta hai)                    | Default (mostly avoid) |
+| **`hidden`**   | Content clip ho jata hai. Scroll nahi hota.                                            | Hide extra content |
+| **`scroll`**   | Hamesha scrollbar dikhta hai (horizontal + vertical)                                   | Always show scroll |
+| **`auto`**     | Sirf tab scrollbar dikhta hai jab content overflow ho                                  | **Best & Most Used** |
+| **`clip`**     | Content clip ho jata hai (scrolling bhi nahi hoti). Modern value.                      | Strict clipping |
+| **`overlay`**  | Scrollbar overlay style mein (macOS jaisa thin) — WebKit only                          | Modern macOS look |
+
+### 3. Individual Properties
+
+| Property            | Matlab                                      | Values |
+|---------------------|---------------------------------------------|--------|
+| `overflow-x`        | Horizontal (left-right) overflow            | visible, hidden, scroll, auto, clip |
+| `overflow-y`        | Vertical (up-down) overflow                 | visible, hidden, scroll, auto, clip |
+| `overflow`          | Dono ke liye shorthand                      | — |
+
+### 4. Most Common & Useful Examples
+
+```css
+/* 1. Best for Cards / Containers */
+.card {
+  overflow: hidden;           /* corners + images clean rakhta hai */
+  border-radius: 12px;
+}
+
+/* 2. Scrollable Area (Recommended) */
+.scroll-container {
+  overflow: auto;             /* scrollbar sirf jab zarurat ho */
+  max-height: 400px;
+}
+
+/* 3. Horizontal Scroll Only (Popular for mobile) */
+.horizontal-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+/* 4. Hide Overflow Completely */
+.hidden-content {
+  overflow: hidden;
+}
+
+/* 5. Text Truncation with Ellipsis */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+### 5. Special Combinations & Tricks
+
+| Goal                              | CSS Code |
+|-----------------------------------|----------|
+| **Vertical Scroll + No Horizontal** | `overflow-y: auto; overflow-x: hidden;` |
+| **Clean Image Container**         | `overflow: hidden;` + `border-radius` |
+| **Custom Scrollbar Area**         | `overflow: auto;` + `scrollbar-width: thin;` |
+| **Prevent Page Scroll** (Modal)   | `overflow: hidden;` on `<body>` |
+| **Text Ellipsis (Single Line)**   | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;` |
+
+### 6. Important Notes & Best Practices
+
+- **`overflow: auto;`** sabse safe aur commonly used hai.
+- **`overflow: hidden;`** bahut useful hai jab aap rounded corners, images clip, ya unwanted scrollbars hide karna chahte ho.
+- **`overflow: visible;`** sirf tab use karo jab aap chahte ho ki content box se bahar dikhe (rare).
+- Mobile par horizontal scroll (`overflow-x: auto`) bahut popular hai (cards row ke liye).
+- `overflow: clip;` new hai aur `hidden` se thoda strict hai (scrolling bhi disable).
+- Accessibility: Jab `overflow: hidden` use karo to keyboard navigation ka khayal rakho.
+
+### 7. Quick Decision Table
+
+| Situation                        | Recommended Value          |
+|----------------------------------|----------------------------|
+| Normal card / container          | `overflow: hidden;`        |
+| Scrollable content area          | `overflow: auto;`          |
+| Horizontal scroll (mobile)       | `overflow-x: auto;`        |
+| Hide extra content               | `overflow: hidden;`        |
+| Modal / full screen overlay      | `overflow: hidden;` on body |
+| Single line text truncate        | `overflow: hidden;` + `text-overflow: ellipsis` |

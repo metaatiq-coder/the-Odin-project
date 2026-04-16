@@ -1,0 +1,75 @@
+### 1. `border-radius` Shorthand Syntax
+
+```css
+border-radius: <radius>{1,4} [ / <radius>{1,4} ]?;
+```
+
+- **`<radius>`** = `<length>` ya `<percentage>`
+- `/` ke baad elliptical (oval) corners ke liye vertical radius aata hai.
+- Negative values **invalid** hain.
+
+### 2. Values Ka Interpretation (Kitne Values Diye)
+
+| Number of Values | Kaise Apply Hota Hai?                                      | Example |
+|------------------|------------------------------------------------------------|---------|
+| **1 value**      | Sab 4 corners mein same radius                             | `border-radius: 10px;` |
+| **2 values**     | 1st → top-left & bottom-right<br>2nd → top-right & bottom-left | `border-radius: 10px 30px;` |
+| **3 values**     | 1st → top-left<br>2nd → top-right & bottom-left<br>3rd → bottom-right | `border-radius: 10px 20px 40px;` |
+| **4 values**     | top-left, top-right, bottom-right, bottom-left             | `border-radius: 10px 20px 30px 40px;` |
+
+### 3. Elliptical Corners (Oval Shape)
+
+`/` use karke horizontal aur vertical radius alag set karo:
+
+| Syntax                          | Matlab |
+|---------------------------------|--------|
+| `border-radius: 50px / 20px;`   | Sab corners mein horizontal 50px, vertical 20px |
+| `border-radius: 20% / 10%;`     | Horizontal 20%, vertical 10% (responsive) |
+| `border-radius: 30px 40px / 10px 20px;` | Different horizontal + vertical for each corner |
+
+### 4. Common Useful Examples
+
+| Goal                        | Code Example                                      | Result |
+|-----------------------------|---------------------------------------------------|--------|
+| **Simple rounded corners**  | `border-radius: 12px;`                            | Sab corners 12px round |
+| **Circle**                  | `border-radius: 50%;`                             | Perfect circle (square element par) |
+| **Pill shape**              | `border-radius: 9999px;` or `50%`                 | Capsule / pill look (rectangular element) |
+| **Only top rounded**        | `border-radius: 20px 20px 0 0;`                   | Top corners round, bottom sharp |
+| **Different corners**       | `border-radius: 10px 30px 20px 5px;`              | Har corner alag |
+| **Elliptical**              | `border-radius: 40px / 15px;`                     | Horizontal stretch, vertical squash |
+| **One corner only**         | `border-top-left-radius: 25px;`                   | Sirf top-left round (longhand) |
+
+### 5. Longhand Properties (Individual Corners)
+
+Agar sirf ek corner change karna ho to longhand better hai:
+
+- `border-top-left-radius`
+- `border-top-right-radius`
+- `border-bottom-right-radius`
+- `border-bottom-left-radius`
+
+**Modern Logical Properties** (RTL / writing-mode ke liye):
+- `border-start-start-radius`
+- `border-start-end-radius`
+- `border-end-start-radius`
+- `border-end-end-radius`
+
+### 6. Percentage vs Length
+
+| Unit          | Kaise Calculate Hota Hai?                     | Best Use |
+|---------------|-----------------------------------------------|----------|
+| **px / rem**  | Fixed size                                    | Precise control |
+| **%**         | Horizontal → element ki **width** se<br>Vertical → element ki **height** se | Responsive designs |
+
+### 7. Important Notes & Best Practices
+
+- `border-radius` **background** ko bhi clip karta hai (agar `border: none` bhi ho).
+- Tables mein `border-collapse: collapse` hone par `border-radius` kaam **nahi** karta.
+- `background-clip: padding-box` ke saath acha combination ban sakta hai.
+- Responsive banane ke liye `%` ya `clamp()` ke saath use karo.
+- Animation support hai → `transition: border-radius 0.3s ease;`
+- `border-radius: 0;` reset karne ke liye.
+
+**Pro Tip**:  
+Buttons aur cards ke liye `border-radius: 8px` ya `12px` common hai.  
+Pill buttons ke liye `9999px` (ya `50%`) use karo.

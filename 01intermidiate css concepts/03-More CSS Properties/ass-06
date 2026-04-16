@@ -1,0 +1,29 @@
+### More CSS Properties Cheat Sheet
+
+| Group                  | Property                  | Kya Karta Hai (Simple Explanation)                          | Common Values / Example                          |
+|------------------------|---------------------------|-------------------------------------------------------------|--------------------------------------------------|
+| **Box Model**         | `box-sizing`             | Border aur padding ko width/height mein include karta hai   | `border-box` (sabse common), `content-box`      |
+| **Sizing**            | `min-width` / `max-width`| Element ki minimum aur maximum width set karta hai         | `min-width: 300px; max-width: 100%;`            |
+| **Sizing**            | `min-height` / `max-height` | Element ki minimum aur maximum height set karta hai      | `min-height: 200px;`                            |
+| **Overflow**          | `overflow`               | Jab content box se bahar nikle to kya ho (scroll, hide etc.) | `visible`, `hidden`, `scroll`, `auto`           |
+| **Borders**           | `border-radius`          | Corners ko round karta hai (cards, buttons ke liye best)    | `10px`, `50%` (circle), `20px 0 20px 0`         |
+| **Backgrounds**       | `background`             | Shorthand for background properties                         | `background: #333 url(image.jpg) no-repeat center;` |
+| **Backgrounds**       | `background-image`       | Background mein image lagata hai                            | `url('photo.jpg')`                              |
+| **Backgrounds**       | `background-size`        | Background image ka size control karta hai                  | `cover`, `contain`, `100% 100%`                 |
+| **Backgrounds**       | `background-position`    | Image ki position set karta hai                             | `center`, `top right`, `50% 50%`                |
+| **Backgrounds**       | `background-repeat`      | Image repeat hoti hai ya nahi                               | `no-repeat`, `repeat`, `repeat-x`, `repeat-y`   |
+| **Shadows**           | `box-shadow`             | Element ke around shadow lagata hai (cards ke liye zabardast) | `0 4px 8px rgba(0,0,0,0.2)`                     |
+| **Shadows**           | `text-shadow`            | Text pe shadow lagata hai                                   | `2px 2px 4px rgba(0,0,0,0.5)`                   |
+| **Opacity**           | `opacity`                | Element ko transparent banata hai                           | `0` (invisible) se `1` (full visible), `0.5`    |
+| **Cursor**            | `cursor`                 | Mouse pointer ka style change karta hai                     | `pointer`, `grab`, `help`, `not-allowed`        |
+| **Others**            | `outline`                | Border jaisa lekin box model mein space nahi leta           | `2px solid red`                                 |
+| **Others**            | `visibility`             | Element dikhaye ya hide kare (space reserved rehta hai)     | `visible`, `hidden`                             |
+| **Others**            | `resize`                 | User element ko resize kar sake                             | `both`, `horizontal`, `vertical`, `none`        |
+
+### Extra Quick Tips (Yaad rakhne ke liye)
+
+- **`border-radius: 50%;`** → Perfect circle banane ke liye
+- **`box-shadow`** sabse zyada use hota hai modern cards aur buttons mein
+- **`background-size: cover;`** → Image ko box mein poora fit karta hai bina stretch kiye
+- **`overflow: hidden;`** + `border-radius` → Round corners ke andar content ko clip karne ke liye best
+- **`box-sizing: border-box;`** almost har project mein global set kar dete hain (reset CSS mein)
