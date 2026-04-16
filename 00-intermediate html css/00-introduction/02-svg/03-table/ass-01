@@ -1,0 +1,108 @@
+### 1. Tables Ka Basic Purpose
+- Tables sirf **tabular data** (rows + columns mein data) ke liye use karo.
+- **Galat use mat karo**: Page layout, design, ya non-tabular content ke liye (accessibility kharab hoti hai).
+
+### 2. Core Table Elements
+
+| Element       | Matlab (Purpose)                          | Example |
+|---------------|-------------------------------------------|---------|
+| `<table>`     | Poori table ka container                  | `<table> ... </table>` |
+| `<tr>`        | Ek row (horizontal line)                  | `<tr> ... </tr>` |
+| `<td>`        | Normal data cell                          | `<td>Content</td>` |
+| `<th>`        | Header cell (bold + semantic)             | `<th>Name</th>` |
+| `<colgroup>`  | Columns ko group karne ke liye (styling)  | `<colgroup><col></colgroup>` |
+| `<col>`       | Single column ko style karne ke liye      | `<col span="2" class="highlight">` |
+
+### 3. Important Attributes
+
+| Attribute      | Kahan lagta hai?     | Matlab                                      | Example |
+|----------------|----------------------|---------------------------------------------|---------|
+| `colspan="n"`  | `<td>` or `<th>`     | Cell kitne **columns** span karega         | `colspan="3"` |
+| `rowspan="n"`  | `<td>` or `<th>`     | Cell kitne **rows** span karega            | `rowspan="2"` |
+| `scope="col"`  | `<th>`               | Yeh column ka header hai (accessibility)   | `scope="col"` |
+| `scope="row"`  | `<th>`               | Yeh row ka header hai                      | `scope="row"` |
+| `span="n"`     | `<col>`              | Kitne columns ko affect karega             | `span="2"` |
+
+### 4. Basic Table Example
+
+```html
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>City</th>
+  </tr>
+  <tr>
+    <td>Ali</td>
+    <td>25</td>
+    <td>Lahore</td>
+  </tr>
+  <tr>
+    <td>Sara</td>
+    <td>30</td>
+    <td>Karachi</td>
+  </tr>
+</table>
+```
+
+### 5. Spanning (Merging Cells) Example
+
+```html
+<table border="1">
+  <tr>
+    <th rowspan="2">Person</th>
+    <th colspan="2">Details</th>
+  </tr>
+  <tr>
+    <th>Age</th>
+    <th>City</th>
+  </tr>
+  <tr>
+    <td>Atiq</td>
+    <td>28</td>
+    <td>Sahiwal</td>
+  </tr>
+</table>
+```
+
+### 6. Column Grouping Example (Styling ke liye)
+
+```html
+<table>
+  <colgroup>
+    <col span="2" class="main-cols">
+    <col class="total-col">
+  </colgroup>
+  <tr>
+    <th>Item</th>
+    <th>Price</th>
+    <th>Total</th>
+  </tr>
+</table>
+```
+
+### 7. Best Practices & Tips (Zaroori Yaad Rakhne Wale)
+
+- Hamesha **`<th>`** use karo headers ke liye (screen readers ke liye acha hai).
+- `scope` attribute lagao accessibility ke liye.
+- Tables ko style karne ke liye **CSS** use karo (default styling bahut simple hoti hai).
+- Mobile pe responsive banane ke liye extra CSS chahiye (media queries ya `overflow-x: auto`).
+- **Galat mat karo**: Tables ko layout ke liye mat use karo (div + CSS Flex/Grid better hain).
+
+### Quick Starter Template
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Header 1</th>
+      <th scope="col">Header 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+    </tr>
+  </tbody>
+</table>

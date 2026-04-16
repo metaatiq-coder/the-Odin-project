@@ -1,0 +1,119 @@
+### 1. Table Ka Structure Overview
+
+| Part                  | Element / Technique Used                  | Purpose |
+|-----------------------|-------------------------------------------|---------|
+| **Caption**           | `<caption>`                               | Table ka clear title (screen readers pehle padhte hain) |
+| **Column Headers**    | `<thead>` + `<th scope="col">`            | Top headers |
+| **Row Group Headers** | `<th scope="rowgroup" colspan="10">`      | "Terrestrial planets", "Gas giants" etc. |
+| **Planet Name**       | `<th scope="row">`                        | Har planet ka naam row header banaye |
+| **Data Cells**        | `<td>`                                    | Actual numbers aur facts |
+| **Grouping**          | `<thead>` + `<tbody>`                     | Better semantic structure |
+| **Special Column**    | `<colgroup>` + `<col class="column-border">` | Planet name column ko thick black border |
+
+### 2. Columns List (Exact Order)
+
+1. **Name**  
+2. **Mass** (10²⁴kg)  
+3. **Diameter** (km)  
+4. **Density** (kg/m³)  
+5. **Gravity** (m/s²)  
+6. **Length of day** (hours)  
+7. **Distance from Sun** (10⁶km)  
+8. **Mean temperature** (°C)  
+9. **Number of moons**  
+10. **Notes**
+
+### 3. Planet Groups (Row Groups)
+
+- **Terrestrial planets** (4 planets)  
+- **Jovian planets**  
+  - Gas giants (Jupiter, Saturn)  
+  - Ice giants (Uranus, Neptune)  
+- **Dwarf planets** (Pluto with note)
+
+### 4. Accessibility Best Practices (Is Challenge Mein Use Kiye Gaye)
+
+- `<caption>` must hai
+- Sab column headers mein `scope="col"`
+- Planet names mein `scope="row"`
+- Group headings mein `scope="rowgroup"` + `colspan="10"`
+- `<thead>` aur `<tbody>` ka proper use
+- No `rowspan` on data (sirf group headings par colspan)
+
+### 5. Recommended CSS (MDN Style)
+
+```css
+table {
+  border-collapse: collapse;
+  border: 2px solid #ccc;
+  font-size: 0.9rem;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+.column-border {
+  border-left: 3px solid black;   /* ya border: 2px solid black */
+}
+
+caption {
+  font-weight: bold;
+  padding: 10px;
+  caption-side: top;
+}
+
+/* Zebra striping */
+tr:nth-child(even) td {
+  background-color: #fafafa;
+}
+```
+
+### 6. Quick Structure Template (Skeleton)
+
+```html
+<table>
+  <caption>Data about the planets of our solar system</caption>
+  
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Mass (10²⁴kg)</th>
+      <!-- baaki 8 columns -->
+    </tr>
+  </thead>
+  
+  <tbody>
+    <!-- Group heading -->
+    <tr>
+      <th scope="rowgroup" colspan="10">Terrestrial planets</th>
+    </tr>
+    
+    <!-- Planet row -->
+    <tr>
+      <th scope="row">Mercury</th>
+      <td>0.330</td>
+      <!-- baaki data -->
+      <td>Closest to the Sun</td>
+    </tr>
+    
+    <!-- Aur planets... -->
+  </tbody>
+</table>
+```
+
+**Note**: Notes column mein kuch planets ke paas text hai (jaise "Our world", "The red planet", "Declassified as a planet in 2006...").
+
+### 7. Pro Tips from This Challenge
+
+- Planet name column ko visually highlight karne ke liye `<colgroup>` + class use karo.
+- Group headings ko `<th>` banao taake screen reader samajh sake.
+- Data ko center align karo for better readability.
+- Alternating row colors (zebra striping) se table asaan padhne layak banti hai.
+- Hamesha `<caption>` + proper `scope` use karo — yeh accessibility ka core hai.

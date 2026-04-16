@@ -1,0 +1,99 @@
+### 1. Table Elements Overview
+
+| Element          | Purpose                                      | Important Notes |
+|------------------|----------------------------------------------|-----------------|
+| `<table>`        | Poori table ka root container                | Block-level element |
+| `<caption>`      | Table ka title / description                 | Sabse pehle hona chahiye (accessibility ke liye best) |
+| `<thead>`        | Header rows group                            | Top headers ke liye |
+| `<tbody>`        | Main data rows group                         | Default auto-add hota hai agar omit karo |
+| `<tfoot>`        | Footer rows (totals etc.)                    | HTML5 mein `<tbody>` ke baad bhi likh sakte ho |
+| `<tr>`           | Table row                                    | Har row ke andar cells |
+| `<th>`           | Header cell (bold + semantic)                | Headers ke liye hamesha use karo |
+| `<td>`           | Data cell                                    | Normal content |
+| `<colgroup>`     | Columns ko group karne ke liye               | Styling ke liye |
+| `<col>`          | Single or multiple columns style             | No content element |
+
+### 2. Important Attributes
+
+| Attribute       | Applies to       | Kya karta hai?                              | Example |
+|-----------------|------------------|---------------------------------------------|---------|
+| `colspan="n"`   | `<th>`, `<td>`   | Cell ko horizontally merge karta hai       | `colspan="3"` |
+| `rowspan="n"`   | `<th>`, `<td>`   | Cell ko vertically merge karta hai         | `rowspan="2"` |
+| `scope`         | `<th>`           | Header ka scope batata hai (accessibility) | `scope="col"` or `scope="row"` |
+| `span`          | `<col>`          | Kitne columns ko affect kare               | `span="2"` |
+| `headers`       | `<td>`           | Complex tables mein header IDs link karta hai | `headers="id1 id2"` |
+
+**Deprecated Attributes (Mat use karo)**: `border`, `cellpadding`, `cellspacing`, `width`, `align`, `bgcolor`, `summary` — inki jagah **CSS** use karo.
+
+### 3. Best Practices
+
+- **Sirf tabular data** ke liye use karo (comparisons, schedules, pricing etc.).
+- Layout ke liye **mat** use karo → Flexbox/Grid better hain.
+- Source order important hai (screen readers top-to-bottom, left-to-right padhte hain).
+- Hamesha `<caption>` add karo.
+- `<thead>`, `<tbody>`, `<tfoot>` use karo structure ke liye.
+- Emails mein abhi bhi tables common hain (compatibility ke liye).
+
+### 4. CSS Styling for Tables (Sabse Useful)
+
+| CSS Property              | Kya karta hai?                                      | Recommended Value / Example |
+|---------------------------|-----------------------------------------------------|-----------------------------|
+| `border-collapse`         | Cells ke borders ko merge ya separate karta hai    | `collapse` (sabse common) |
+| `border-spacing`          | Cells ke beech space (sirf separate mode mein)     | `0 0` or `10px` |
+| `padding`                 | Cell ke andar space (old cellpadding ki jagah)     | `0.75rem 1rem` |
+| `vertical-align`          | Content ko vertically align karta hai              | `middle`, `top`, `bottom` |
+| `table-layout`            | Column width calculation ka tarika                 | `fixed` (fast & predictable) |
+| `width`                   | Table ya column ki width                           | `100%` |
+| `white-space`             | Text wrapping control                              | `nowrap` |
+
+**Zebra Striping (Alternate Row Colors)**:
+```css
+tbody tr:nth-child(odd) {
+  background: #f8f8f8;
+}
+```
+
+**Row Hover Effect**:
+```css
+tr:hover td {
+  background: #f0f0f0;
+}
+```
+
+### 5. Basic Clean Table Template
+
+```html
+<table>
+  <caption>Monthly Sales Report</caption>
+  <thead>
+    <tr>
+      <th scope="col">Month</th>
+      <th scope="col">Sales</th>
+      <th scope="col">Profit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>January</td>
+      <td>₹45,000</td>
+      <td>₹12,000</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>Total</td>
+      <td>₹5,20,000</td>
+      <td>₹1,45,000</td>
+    </tr>
+  </tfoot>
+</table>
+```
+
+### 6. Quick Tips from CSS-Tricks
+
+- `table-layout: fixed;` → Fast rendering aur predictable columns.
+- Responsive tables ke liye: Media queries + `overflow-x: auto` ya row stacking technique.
+- Column highlighting ke liye JS ki zaroorat pad sakti hai.
+- Emmet shortcut: `table>tr*5>td*4` (jaldi table banao).
+- Accessibility: `<caption>`, `<th>` + `scope` must hain.
+

@@ -1,0 +1,87 @@
+### 1. Kyun Table Accessibility Zaroori Hai?
+- Visual impairment wale users (screen readers) tables ko samajh nahi paate agar sirf visual design ho.
+- Header aur data cells ke beech **programmatic connection** banana zaroori hai.
+- Goal: Screen reader users ko bhi utna hi asaan navigation mile jitna normal users ko.
+
+### 2. Core Techniques for Accessible Tables
+
+| Technique                  | Kya Use Karein?                          | Kyun Best Hai? |
+|---------------------------|------------------------------------------|----------------|
+| **`<caption>`**           | Table ke turant baad `<caption>` lagao   | Table ka title/description sabko dikhta hai aur screen reader pehle padhta hai |
+| **`<th>` instead of `<td>`** | Headers ke liye hamesha `<th>` use karo | Screen reader headers ko pehchaan sakta hai |
+| **`<thead>`, `<tbody>`, `<tfoot>`** | Table ko sections mein divide karo     | Better structure, navigation aur styling |
+| **`scope` attribute**     | `<th>` par `scope="col"` ya `scope="row"` | Simple tables ke liye sabse asaan aur effective |
+| **`id` + `headers`**      | Complex tables mein use karo             | Multi-level headers ke liye sabse precise |
+
+**Deprecated**: `<table summary="...">` — isko mat use karo. `<caption>` better hai.
+
+### 3. `scope` Attribute Values
+
+| Value              | Matlab                                      | Kab Use Karein? |
+|--------------------|---------------------------------------------|-----------------|
+| `scope="col"`      | Yeh column ka header hai                    | Normal column headers |
+| `scope="row"`      | Yeh row ka header hai                       | Row headers (left side) |
+| `scope="colgroup"` | Multiple columns ka group header            | Top level group (e.g. "Clothes") |
+| `scope="rowgroup"` | Multiple rows ka group header               | Left side group (e.g. "Netherlands") |
+
+### 4. Simple Accessible Table Example
+
+```html
+<table>
+  <caption>How I chose to spend my money</caption>
+  <thead>
+    <tr>
+      <th scope="col">Purchase</th>
+      <th scope="col">Cost (€)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Haircut</td>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### 5. Complex Tables — `id` + `headers` Method
+
+Jab `rowspan`/`colspan` ho ya multi-level headers hon, to yeh best hai:
+
+```html
+<table>
+  <caption>Clothing sales by country and city</caption>
+  <tr>
+    <th id="country" rowspan="2" scope="rowgroup">Country</th>
+    <th id="clothes" colspan="2" scope="colgroup">Clothes</th>
+  </tr>
+  <tr>
+    <th id="trousers" scope="col">Trousers</th>
+    <th id="skirts" scope="col">Skirts</th>
+  </tr>
+  <tr>
+    <th id="belgium" scope="row">Belgium</th>
+    <td headers="belgium clothes trousers">56</td>
+    <td headers="belgium clothes skirts">34</td>
+  </tr>
+</table>
+```
+
+### 6. Quick Accessibility Checklist
+
+| Check Karo                          | Kaise? |
+|-------------------------------------|--------|
+| Table ka clear `<caption>` hai?     | Haan |
+| Sab headers `<th>` mein hain?       | Haan |
+| `<thead>` aur `<tbody>` use kiye?   | Haan (badi tables mein) |
+| `scope` attribute sahi lagaya?      | Simple tables ke liye |
+| Complex table hai to `id` + `headers`? | Haan |
+| `rowspan` / `colspan` sahi associated? | Haan |
+
+**Pro Tips**:
+- Simple tables mein `scope` kaafi hai.
+- Bahut complex tables mein `id` + `headers` zyada reliable hai.
+- Hamesha screen reader (NVDA, VoiceOver) se test karo.
+- Tables ko layout ke liye mat use karo — sirf real tabular data ke liye.
+
+Ab aapki tables screen reader friendly ban jayengi! 
