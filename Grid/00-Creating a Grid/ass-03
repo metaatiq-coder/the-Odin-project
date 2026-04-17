@@ -1,0 +1,54 @@
+### 1. Grid Badge (Sabse Fast Way)
+
+- Elements panel mein jab koi element pe `display: grid` ya `display: inline-grid` hota hai, uske paas ek **grey "grid" badge** dikhta hai.
+- Badge pe **click** karo → Grid overlay turant on/off ho jayega.
+- Active hone pe badge ka color change ho jata hai.
+
+### 2. Grid Overlay Kya Dikhaata Hai?
+
+Overlay page pe directly grid ko highlight karta hai:
+
+- **Grid Lines** → Positive aur negative line numbers
+- **Track Sizes** → Authored size vs Computed size (e.g., `1fr - 450px`)
+- **Area Names** → Agar `grid-template-areas` use kiye ho to naam dikhte hain
+- **Gaps** → Dashed lines ke saath gaps clear dikhte hain
+- **Extend Grid Lines** → Lines ko viewport ke edge tak extend kar sakte ho (pura context samajhne ke liye)
+
+### 3. Layout Pane → Grid Section (Sabse Powerful)
+
+DevTools kholo → **Elements** tab → **Layout** pane (right side mein)
+
+Yahan **Grid** section mein ye options milte hain:
+
+| Option                        | Kya Karta Hai? (Asan Explanation) |
+|-------------------------------|------------------------------------|
+| **Show line numbers**         | Line numbers dikhaata hai (default) |
+| **Show line names**           | Named lines (`[left]`, `[right]`) dikhaata hai |
+| **Hide line labels**          | Numbers/names dono hide |
+| **Show track sizes**          | Har track ka size (authored + computed) |
+| **Show area names**           | Grid areas ke naam overlay pe |
+| **Extend grid lines**         | Lines ko screen ke edge tak lambi karta hai |
+
+**Extra Features:**
+- Multiple grids ko alag-alag colors se highlight kar sakte ho
+- Har grid ke paas checkbox (on/off) + color picker + highlight icon
+- Highlight icon pe click karo → Element automatically select ho jayega
+
+### 4. Grid Editor (Visual Editing)
+
+Styles pane mein `display: grid` ke paas ek **Grid Editor** button hota hai.
+
+Isse aap click se yeh sab change kar sakte ho:
+- `justify-content`, `align-content`
+- `justify-items`, `align-items`
+- `justify-self`, `align-self`
+
+Bina CSS type kiye live preview milta hai – bohot time saving!
+
+### Quick Workflow (Recommended)
+
+1. Elements panel mein grid element dhundo → **grid badge** pe click karo (overlay on)
+2. **Layout** pane kholo → Grid section mein options tweak karo
+3. Track sizes aur area names on karke samjho kya ho raha hai
+4. Agar alignment issue hai to **Grid Editor** button use karo
+5. Multiple grids ho to alag-alag colors assign karke compare karo

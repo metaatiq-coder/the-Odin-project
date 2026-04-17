@@ -1,0 +1,82 @@
+### Basic Terminology (Samajhne ke liye zaroori)
+
+| Term                | Asan Description |
+|---------------------|------------------|
+| **Grid Container**  | Parent element jisme `display: grid` lagate ho |
+| **Grid Item**       | Container ke direct children |
+| **Grid Line**       | Horizontal ya vertical lines jo grid ko divide karti hain |
+| **Grid Track**      | Ek row ya column (space between two lines) |
+| **Grid Cell**       | Sabse chhota box (ek row + ek column ke beech) |
+| **Grid Area**       | Multiple cells ka combined area |
+
+### Starting Point
+
+```css
+.container {
+  display: grid;           /* ya inline-grid */
+}
+```
+
+### Grid Container Properties (Parent)
+
+| Property                    | Asan Description                                      | Common Example |
+|-----------------------------|-------------------------------------------------------|----------------|
+| `grid-template-columns`     | Columns define karta hai                              | `repeat(3, 1fr)` |
+| `grid-template-rows`        | Rows define karta hai                                 | `100px auto 1fr` |
+| `grid-template-areas`       | Areas ko naam dekar layout banao                      | `"header header" "main sidebar"` |
+| `grid-auto-columns`         | Automatically bani columns ka size                    | `minmax(100px, 1fr)` |
+| `grid-auto-rows`            | Automatically bani rows ka size                       | `100px` |
+| `grid-auto-flow`            | Items ka auto placement (row / column / dense)        | `dense` |
+| `gap` / `row-gap` / `column-gap` | Items ke beech space                             | `gap: 20px;` |
+| `justify-content`           | Poore grid ko horizontally align (extra space ho to)  | `center`, `space-between` |
+| `align-content`             | Poore grid ko vertically align                        | `center` |
+| `place-content`             | Shorthand (align + justify)                           | `center stretch` |
+| `justify-items`             | Sab items ko horizontally align                       | `center` |
+| `align-items`               | Sab items ko vertically align                         | `start` |
+| `place-items`               | Shorthand                                             | `center` |
+
+### Grid Item Properties (Children)
+
+| Property              | Asan Description                                      | Example |
+|-----------------------|-------------------------------------------------------|---------|
+| `grid-column`         | Column start / end (shorthand)                        | `1 / span 3` or `2 / 5` |
+| `grid-row`            | Row start / end (shorthand)                           | `1 / 4` |
+| `grid-area`           | Area naam se place karo ya shorthand position         | `header` or `1 / 2 / 3 / 4` |
+| `justify-self`        | Single item ko horizontally align                     | `end` |
+| `align-self`          | Single item ko vertically align                       | `center` |
+| `place-self`          | Shorthand                                             | `center end` |
+
+### Powerful Units & Functions
+
+| Feature          | Description                                          | Example |
+|------------------|------------------------------------------------------|---------|
+| `fr`             | Fraction unit (remaining space)                      | `1fr 2fr` |
+| `repeat()`       | Tracks ko repeat karo                                | `repeat(3, 1fr)` |
+| `minmax()`       | Min aur max size set karo                            | `minmax(200px, 1fr)` |
+| `auto-fit`       | Columns fit karega, empty tracks collapse            | `repeat(auto-fit, minmax(250px, 1fr))` |
+| `auto-fill`      | Columns fit karega, empty tracks rakhega             | `repeat(auto-fill, minmax(250px, 1fr))` |
+
+**Responsive Grid ka Sabse Popular Pattern:**
+```css
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+```
+
+### Grid Template Areas Example
+
+```css
+.container {
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+}
+
+.header   { grid-area: header; }
+.sidebar  { grid-area: sidebar; }
+.main     { grid-area: main; }
+.footer   { grid-area: footer; }
+```
