@@ -1,0 +1,131 @@
+### 1. Prototype Kya Hai?
+
+- Har object ka ek internal hidden link hota hai → `[[Prototype]]`
+- Yeh link dusre object ko point karta hai
+- Us dusre object se properties aur methods **inherit** hote hain
+
+**Access karne ke tarike:**
+
+```js
+const obj = {};
+
+Object.getPrototypeOf(obj);     // Recommended way
+obj.__proto__;                  // Old way (production mein avoid karo)
+```
+
+### 2. Prototype Chain (Sabse Important Concept)
+
+Jab aap koi property ya method access karte ho:
+
+1. Pehle object khud mein dekho
+2. Agar nahi mila → uske `[[Prototype]]` mein dekho
+3. Agar wahan bhi nahi → uske prototype ke prototype mein dekho...
+4. Chain `Object.prototype` pe khatam hoti hai
+5. Uske baad `null` milta hai
+
+**Example Chain:**
+```
+[] (Array instance)
+   ↓
+Array.prototype
+   ↓
+Object.prototype
+   ↓
+null
+```
+
+### 3. Constructor Function + Prototype
+
+```js
+function Hero(name) {
+  this.name = name;           // Own property
+}
+
+// Method prototype pe add karo (memory efficient)
+Hero.prototype.greet = function() {
+  return `Hello, I am ${this.name}`;
+};
+
+const hero1 = new Hero("Thor");
+const hero2 = new Hero("Loki");
+
+hero1.greet();   // "Hello, I am Thor"
+```
+
+**Note:** `greet` method dono objects pe alag-alag nahi bana – yeh shared hai `Hero.prototype` pe.
+
+### 4. Inheritance (Prototype Linking)
+
+```js
+function Warrior(name, weapon) {
+  Hero.call(this, name);      // Parent constructor call
+  this.weapon = weapon;
+}
+
+// Link prototypes (Inheritance)
+Object.setPrototypeOf(Warrior.prototype, Hero.prototype);
+
+Warrior.prototype.attack = function() {
+  return `${this.name} attacks with ${this.weapon}!`;
+};
+
+const warrior = new Warrior("Bjorn", "Axe");
+
+warrior.greet();   // Inherited from Hero
+warrior.attack();  // Own method
+```
+
+### 5. Key Methods & Properties
+
+| Method / Property               | Kya Karta Hai? |
+|---------------------------------|----------------|
+| `Object.getPrototypeOf(obj)`    | Object ka prototype return karta hai |
+| `Object.setPrototypeOf(obj, proto)` | Prototype set karta hai |
+| `obj.hasOwnProperty('key')`     | Sirf own property check karta hai (inherited nahi) |
+| `obj.isPrototypeOf(other)`      | Check karta hai kya yeh prototype chain mein hai |
+| `obj instanceof Constructor`    | Check karta hai constructor ka prototype chain mein hai |
+
+### 6. `__proto__` vs `prototype`
+
+| Property              | Belongs To          | Meaning |
+|-----------------------|---------------------|--------|
+| `obj.__proto__`       | Instance (object)   | Us object ka `[[Prototype]]` link |
+| `Constructor.prototype` | Constructor function | Naye objects ke liye blueprint (jo unka `[[Prototype]]` banega) |
+
+### 7. Modern Way – ES6 `class` (Syntactic Sugar)
+
+```js
+class Hero {
+  constructor(name) {
+    this.name = name;
+  }
+
+  greet() {
+    return `Hello, I am ${this.name}`;
+  }
+}
+
+class Warrior extends Hero {
+  constructor(name, weapon) {
+    super(name);
+    this.weapon = weapon;
+  }
+
+  attack() {
+    return `${this.name} attacks with ${this.weapon}!`;
+  }
+}
+```
+
+**Under the hood** class bhi prototype chaining hi use karti hai.
+
+### Best Practices & Gotchas
+
+- Methods hamesha `prototype` pe add karo (memory saving)
+- `__proto__` production code mein mat use karo
+- `Object.setPrototypeOf()` ya `class` + `extends` use karo
+- `hasOwnProperty()` use karo jab inherited properties ko ignore karna ho
+- Prototype chain lambi mat banao (performance issue ho sakta hai)
+
+**Key Takeaway:**  
+JavaScript mein inheritance **delegation** ke through hota hai — objects dusre objects se properties/methods maangte hain via prototype chain.

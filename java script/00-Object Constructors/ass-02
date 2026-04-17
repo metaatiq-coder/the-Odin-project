@@ -1,0 +1,125 @@
+### 1. [[Prototype]] – Core Concept
+
+Har JavaScript object ke paas ek **hidden internal property** hoti hai jise `[[Prototype]]` kehte hain.
+
+- Yeh kisi dusre object ko point karti hai ya `null` hoti hai.
+- Jab aap koi property/method access karte ho jo object pe nahi hai, JavaScript usko `[[Prototype]]` mein dhundta hai.
+
+**Simple Example:**
+
+```js
+let animal = {
+  eats: true,
+  walk() {
+    alert("Animal walks");
+  }
+};
+
+let rabbit = {
+  jumps: true
+};
+
+rabbit.__proto__ = animal;   // Old way (for understanding)
+
+console.log(rabbit.eats);    // true  (inherited from animal)
+rabbit.walk();               // "Animal walks"
+```
+
+**Modern tarika (Recommended):**
+
+```js
+let rabbit = Object.create(animal);  // rabbit.[[Prototype]] = animal
+rabbit.jumps = true;
+```
+
+### 2. Prototype Chain (Line-by-Line)
+
+```js
+let animal = { eats: true };
+let rabbit = { jumps: true, __proto__: animal };
+let longEar = { earLength: 10, __proto__: rabbit };
+```
+
+**Chain looks like this:**
+```
+longEar → rabbit → animal → Object.prototype → null
+```
+
+Jab aap `longEar.walk()` call karte ho:
+- `longEar` mein nahi mila
+- `rabbit` mein nahi mila
+- `animal` mein mil gaya → execute hua
+
+### 3. Important Rules (Article ke Golden Rules)
+
+1. **Reading** uses the prototype chain.
+2. **Writing / Deleting** does **NOT** use the prototype (woh direct current object pe hota hai).
+3. Agar method prototype se aaya ho, tab bhi **`this`** current object ko refer karta hai (na ki prototype ko).
+
+**Example of Rule 3:**
+
+```js
+let animal = {
+  sleep() {
+    this.isSleeping = true;
+  }
+};
+
+let rabbit = { __proto__: animal };
+
+rabbit.sleep();
+alert(rabbit.isSleeping);     // true
+alert(animal.isSleeping);     // undefined (state rabbit mein save hui)
+```
+
+### 4. Key Methods
+
+| Method                        | Kya Karta Hai?                              | Example |
+|-------------------------------|---------------------------------------------|--------|
+| `Object.create(proto)`        | Naya object banao with given prototype      | `Object.create(animal)` |
+| `Object.getPrototypeOf(obj)`  | Object ka [[Prototype]] return karta hai    | `Object.getPrototypeOf(rabbit)` |
+| `Object.setPrototypeOf(obj, proto)` | Prototype change karta hai             | `Object.setPrototypeOf(rabbit, animal)` |
+
+**Note:** `__proto__` purana hai. Production code mein `Object.create()` aur `Object.getPrototypeOf/setPrototypeOf` use karo.
+
+### 5. Gotchas (Common Mistakes)
+
+- **Shared mutable state** (dangerous!):
+  ```js
+  let hamster = { stomach: [] };
+  let speedy = { __proto__: hamster };
+  let lazy = { __proto__: hamster };
+
+  speedy.eat("apple");
+  console.log(lazy.stomach); // ["apple"] → dono share kar rahe hain!
+  ```
+
+  **Solution:** Har object apna `stomach: []` rakhe.
+
+- `for...in` loop inherited properties bhi deta hai.
+  - Sirf own properties chahiye to `hasOwnProperty()` use karo.
+
+- Agar aap prototype pe method override kar dete ho, to original method hide ho jata hai.
+
+### 6. Modern Approach vs Old
+
+- **Old Way**: Constructor functions + `.prototype`
+- **Modern Way**: `class` + `extends` (under the hood yeh bhi prototypes hi use karta hai)
+
+**Class Example (Syntactic Sugar):**
+
+```js
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  eat() {
+    alert(`${this.name} eats`);
+  }
+}
+
+class Rabbit extends Animal {
+  jump() {
+    alert(`${this.name} jumps`);
+  }
+}
