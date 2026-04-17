@@ -1,0 +1,82 @@
+### 1. Constraint Validation Kya Hai?
+HTML5 mein browsers automatically input check karte hain rules ke against (jaise email format, required field, number range).  
+Isse fast feedback milta hai aur kam JavaScript likhna padta hai.
+
+### HTML5 Built-in Validation Attributes
+
+| Attribute              | Asan Description                                      | Example |
+|------------------------|-------------------------------------------------------|---------|
+| `required`             | Field khali nahi chhod sakte                           | `<input required>` |
+| `minlength` / `maxlength` | Text ki length limit                                | `<input minlength="6" maxlength="12">` |
+| `min` / `max`          | Number, date, range ke liye minimum/maximum value     | `<input type="number" min="1" max="100">` |
+| `step`                 | Number mein increment (0.5, 10 etc.)                  | `<input type="number" step="5">` |
+| `type`                 | Email, url, tel, number, date etc. automatic check    | `<input type="email">` |
+| `pattern`              | Custom regex (regular expression)                     | `<input pattern="^[0-9]{5}$" title="5 digit zip code">` |
+
+### CSS Pseudo-classes for Visual Feedback
+
+| Pseudo-class             | Kab Apply Hota Hai?                              | Common Use |
+|--------------------------|--------------------------------------------------|------------|
+| `:valid`                 | Input sahi hai                                   | Green border |
+| `:invalid`               | Input galat hai                                  | Red border |
+| `:required`              | Required field                                   | Highlight |
+| `:optional`              | Optional field                                   | Light style |
+| `:user-valid` / `:user-invalid` | User ne kuch enter kiya aur ab valid/invalid hai | Better UX (sirf user interaction ke baad) |
+
+**Example:**
+```css
+input:invalid {
+  border: 2px solid red;
+}
+input:valid {
+  border: 2px solid green;
+}
+```
+
+### JavaScript Constraint Validation API
+
+**Key Properties (on form element or input)**
+
+| Property / Object         | Kya Batata Hai? |
+|---------------------------|-----------------|
+| `form.checkValidity()`    | Poora form valid hai ya nahi (true/false) |
+| `input.validity`          | Detailed object (`valueMissing`, `typeMismatch`, `tooShort`, `patternMismatch` etc.) |
+| `input.validationMessage` | Browser ka default error message |
+| `input.willValidate`      | Kya yeh field validate hoga |
+
+**Key Methods**
+
+| Method                        | Kya Karta Hai? |
+|-------------------------------|----------------|
+| `checkValidity()`             | Check karta hai, agar invalid to `invalid` event fire |
+| `reportValidity()`            | Error message popup/show karta hai |
+| `setCustomValidity("message")`| Apna custom error message set karta hai (khali string se clear) |
+
+**Simple Custom Validation Example:**
+```js
+const password = document.getElementById('password');
+
+password.addEventListener('input', () => {
+  if (password.value.length < 8) {
+    password.setCustomValidity('Password must be at least 8 characters long.');
+  } else {
+    password.setCustomValidity('');   // Clear custom message
+  }
+});
+```
+
+### Best Practices & Tips (Article Highlights)
+
+- Pehle HTML5 attributes se shuru karo (kam JS).
+- Complex logic ke liye JavaScript Constraint API use karo.
+- Error messages **clear, helpful aur short** rakho.
+- `:user-invalid` pseudo-class use karo taaki errors sirf tab dikhein jab user kuch type kar chuka ho.
+- Accessibility maintain karo (ARIA attributes + proper labels).
+- Form submit hone se pehle `form.checkValidity()` check kar sakte ho.
+- **Never rely only on client-side** — server pe validation + sanitization zaroori hai.
+- Custom JS validation se bachao jab tak zaruri na ho (accessibility issues ho sakte hain).
+
+### Browser Support
+HTML5 Constraint Validation ka support **bahut achha** hai (almost all modern browsers).  
+Lekin purane browsers mein fallback (extra JS) rakhna better hai.
+

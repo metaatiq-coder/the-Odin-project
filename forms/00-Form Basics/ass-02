@@ -1,0 +1,46 @@
+### Main Categories of Form Controls
+
+| Category                          | Kya Hai? (Asan Explanation)                                      | Important Elements / Types | Best Use |
+|-----------------------------------|------------------------------------------------------------------|----------------------------|----------|
+| **Basic Native Form Controls**    | Classic HTML `<input>` types jo pehle se the                    | `text`, `password`, `checkbox`, `radio`, `button`, `submit`, `reset`, `file`, `hidden`, `image` | Simple text, login, yes/no, file upload |
+| **HTML5 Input Types**             | Naye advanced `<input>` types jo HTML5 mein aaye (better UX + validation) | `email`, `url`, `tel`, `number`, `search`, `date`, `time`, `datetime-local`, `month`, `week`, `color`, `range` + `<output>` | Email validation, date picker, sliders, color picker |
+| **Other Form Controls**           | `<input>` ke alawa ke controls                                   | `<select>`, `<textarea>`, `<meter>`, `<progress>` | Dropdown, long text, gauge, progress bar |
+
+**Note:** Har category ka alag dedicated tutorial hai MDN pe.
+
+### 1. Basic Native Form Controls (Old & Reliable)
+
+| Control Type              | Element + Type                  | Asan Use Case                          | Key Attributes |
+|---------------------------|---------------------------------|----------------------------------------|----------------|
+| Text Input                | `<input type="text">`           | Name, username                         | `placeholder`, `maxlength` |
+| Password                  | `<input type="password">`       | Password field                         | `autocomplete` |
+| Checkbox                  | `<input type="checkbox">`       | Multiple options select (Yes/No)       | `checked`, `value` |
+| Radio Button              | `<input type="radio">`          | Single choice from group               | `name` (same for group), `checked` |
+| File Upload               | `<input type="file">`           | Photo, document upload                 | `accept`, `multiple` |
+| Button                    | `<input type="button">`         | Custom button                          | `value` |
+| Submit                    | `<input type="submit">`         | Form submit button                     | - |
+| Reset                     | `<input type="reset">`          | Form reset button                      | - |
+| Hidden                    | `<input type="hidden">`         | Backend data (user nahi dekhega)       | `value` |
+
+### 2. HTML5 Input Types (Modern & Smart)
+
+| Input Type                  | Element                         | Asan Description                              | Extra Benefits |
+|-----------------------------|---------------------------------|-----------------------------------------------|----------------|
+| Email                       | `<input type="email">`          | Email address                                 | Auto validation |
+| URL                         | `<input type="url">`            | Website link                                  | Auto validation |
+| Telephone                   | `<input type="tel">`            | Phone number                                  | Mobile keyboard |
+| Number                      | `<input type="number">`         | Numeric input + spinner                       | `min`, `max`, `step` |
+| Search                      | `<input type="search">`         | Search box                                    | Clear button |
+| Range (Slider)              | `<input type="range">`          | Slider (volume, price)                        | `min`, `max` |
+| Color Picker                | `<input type="color">`          | Color selection                               | Native picker |
+| Date / Time Pickers         | `date`, `time`, `datetime-local`, `month`, `week` | Calendar & time selection                   | Native UI |
+| Output                      | `<output>`                      | Calculation result display                    | JS se dynamically update |
+
+### 3. Other Form Controls (Non-`<input>`)
+
+| Control                     | Element                         | Asan Use Case                                 | Key Points |
+|-----------------------------|---------------------------------|-----------------------------------------------|------------|
+| Dropdown / Select Box       | `<select>` + `<option>`         | Single or multiple choice from list           | `<optgroup>` for grouping |
+| Multi-line Text             | `<textarea>`                    | Long messages, comments, address              | `rows`, `cols`, `maxlength` |
+| Meter (Gauge)               | `<meter>`                       | Show measurement (battery, progress value)    | `min`, `max`, `value`, `low`, `high` |
+| Progress Bar                | `<progress>`                    | Task progress (loading, file upload)          | `value`, `max` |

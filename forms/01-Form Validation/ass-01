@@ -1,0 +1,77 @@
+### Types of Form Validation
+
+| Type                        | Asan Explanation                                      | Kab Use Karo? |
+|-----------------------------|-------------------------------------------------------|---------------|
+| **HTML5 Built-in**          | Attributes se automatic validation (no JS needed)     | Simple cases, fast start |
+| **JavaScript (Constraint API)** | Custom messages, complex rules, better control       | Advanced validation |
+| **Pure JavaScript**         | Manual checking (regex, logic) – full control         | Jab built-in kaafi na ho |
+
+**Best Advice:** Pehle HTML5 attributes use karo, phir JS se improve karo.
+
+### HTML5 Validation Attributes (Sabse Common)
+
+| Attribute          | Kya Karta Hai?                                      | Example |
+|--------------------|-----------------------------------------------------|---------|
+| `required`         | Field khali nahi chhod sakte                         | `<input required>` |
+| `minlength` / `maxlength` | Text ki minimum/maximum length                     | `<input minlength="6" maxlength="12">` |
+| `min` / `max`      | Number ya date ke liye range                        | `<input type="number" min="1" max="100">` |
+| `step`             | Number mein kitna increment (e.g. 0.5)              | `<input type="number" step="0.5">` |
+| `type`             | Email, number, url, date etc. automatic check       | `<input type="email">` |
+| `pattern`          | Regular Expression (regex) se custom format         | `<input pattern="[0-9]{5}" title="5 digits">` |
+
+**Note:** `pattern` `<textarea>` pe kaam nahi karta.
+
+### Constraint Validation API (JavaScript)
+
+**Important Properties**
+
+| Property              | Kya Batata Hai? |
+|-----------------------|-----------------|
+| `element.validity`    | Object jo batata hai kya galat hai (`valueMissing`, `typeMismatch`, `tooShort` etc.) |
+| `element.validationMessage` | Browser ka default error message |
+| `element.willValidate` | Kya yeh element validate hoga |
+
+**Important Methods**
+
+| Method                    | Kya Karta Hai? |
+|---------------------------|----------------|
+| `checkValidity()`         | Check karta hai, invalid hone pe `invalid` event fire hota hai |
+| `reportValidity()`        | Error message show karta hai |
+| `setCustomValidity("msg")`| Custom error message set karta hai (khali string se clear) |
+
+**Simple JS Example:**
+```js
+const email = document.querySelector("#email");
+
+email.addEventListener("input", () => {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("Please enter a valid email address!");
+  } else {
+    email.setCustomValidity("");   // clear custom message
+  }
+});
+```
+
+### CSS Styling for Validation States
+
+| Pseudo-class           | Kab Apply Hota Hai? |
+|------------------------|---------------------|
+| `:valid`               | Jab input sahi hai |
+| `:invalid`             | Jab input galat hai |
+| `:required`            | Required fields |
+| `:user-invalid`        | User ne kuch type kiya aur ab invalid hai (better UX) |
+| `:in-range` / `:out-of-range` | Number range ke andar/bahar |
+
+**Example CSS:**
+```css
+input:invalid {
+  border: 2px solid red;
+}
+
+input:valid {
+  border: 2px solid green;
+}
+
+input:required {
+  background-color: #fff8e1;
+}
