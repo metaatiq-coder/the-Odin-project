@@ -1,0 +1,27 @@
+### Web Forms Kya Hain? (Simple Definition)
+Web forms users se data collect karne aur UI control karne ka powerful tool hain (jaise login, signup, feedback, shopping cart).  
+Yeh **HTML + CSS + JavaScript** ka perfect combination maangte hain kyunki forms complex hote hain.
+
+**Prerequisites (Pehle yeh seekh lo):**
+- Introduction to HTML (complete)
+- Basic native form controls
+- CSS aur JavaScript ka basic knowledge
+
+### Recommended Learning Path (Introductory Tutorials)
+
+| Order | Tutorial Title                          | Asan Description                                                                 | Kya Seekhoge? |
+|-------|-----------------------------------------|----------------------------------------------------------------------------------|---------------|
+| 1     | **Your first form**                     | Pehli baar simple form banayein – HTML structure, basic styling aur data server pe bhejna | Form basics, `<form>`, `<input>`, `<label>`, `<button>`, simple CSS, form submission |
+| 2     | **How to structure a web form**         | Form ko semantically aur achhe se structure karna (meaningful markup)            | `<fieldset>`, `<legend>`, `<label>`, proper grouping, accessibility |
+
+**Tip:** Pehle "Your first form" se shuru karo, phir structure wala tutorial padho. Iske baad hi advanced parts (controls, styling, validation) samajh aayenge.
+
+### Poora Forms Module Ka Overview (Quick Structure)
+
+| Section                          | Kya Cover Karta Hai? (Asan Explanation) |
+|----------------------------------|-----------------------------------------|
+| **Introductory Tutorials**       | Basic form banana aur structure         |
+| **The different form controls**  | `<input>` types, HTML5 inputs, `<select>`, `<textarea>`, `<meter>`, `<progress>` etc. |
+| **Form styling tutorials**       | Basic + Advanced CSS for forms, custom `<select>`, UI pseudo-classes |
+| **Validating and submitting**    | Client-side validation + form data securely bhejna |
+| **Additional tutorials**         | Custom form controls, JavaScript se submit, legacy browser support |

@@ -1,0 +1,26 @@
+### Core Principles (Main Advice)
+- **Prevention > Correction** → Form design aisa banao ke galtiyan kam hon (rules upfront dikhao).
+- Validation **contextual** aur **immediate** honi chahiye.
+- Users ko block mat karo — unko form bharne do aur errors dikhate raho.
+
+### Do’s vs Don’ts (Sabse Important Table)
+
+| Aspect                        | ✅ Do (Best Practice)                                      | ❌ Don’t (Avoid)                                              |
+|-------------------------------|-----------------------------------------------------------|-------------------------------------------------------------|
+| **Error Message Location**    | Har error ko usi input ke **paas** (inline) dikhao        | Sab errors ek jagah (top/bottom) mein collect mat karo      |
+| **Submit Button**             | Submit button **hamesha enabled** rakho                   | Submit button ko disable mat karo (users errors miss kar sakte hain) |
+| **Feedback**                  | Positive (green tick) + Negative (error) dono do          | Sirf errors dikhana                                         |
+| **Error Message Language**    | Simple, human-readable (e.g. “Please enter a valid email”) | Technical jargon (e.g. “Invalid format: regex mismatch”)    |
+| **Visual Indicators**         | Exclamation icon (!) har error ke saath lagao             | Sirf color pe depend mat karo (colorblind users ke liye)    |
+| **Icon + Message**            | Icon ke saath clear text message dikhao                   | Error sirf icon mein hide mat karo                          |
+| **Password Rules**            | Rules **turant** dikhao jab user type karna shuru kare    | Rules sirf submit ke baad dikhao                            |
+| **Overall Approach**          | Mistakes ko **prevent** karne pe focus                    | Sirf correction pe depend mat karo                          |
+
+### Practical Tips from the Thread
+
+- **Inline Errors** sabse behtar hain → User ko turant pata chal jaye kya galat hai bina scroll kiye.
+- Submit button disable karne se users sochte hain form submit nahi ho sakta, jabki asal mein errors dikha sakte ho.
+- Colorblind users ke liye **icon** (exclamation mark) bohot zaroori hai.
+- Password field mein real-time rules show karo (length, uppercase, number etc.).
+- Form ko aisa design karo ke users ko galti karne ka mauka hi kam mile (clear labels, helpful placeholders, good defaults).
+
