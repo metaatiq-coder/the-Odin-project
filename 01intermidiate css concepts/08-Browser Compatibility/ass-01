@@ -1,0 +1,65 @@
+### Home Page Overview
+
+| Section                  | Kya Hai? (Asan Explanation)                                      | Kab Use Karo? |
+|--------------------------|------------------------------------------------------------------|---------------|
+| **Search Bar**           | Koi bhi feature type karo (jaise: `clamp`, `flexbox`, `webp`)   | Har baar starting point |
+| **Popular Features**     | Sab se zyada search kiye gaye features (WebP, Flexbox, Grid etc.) | Quick check ke liye |
+| **Latest Features**      | Naye features jo abhi-abhi add hue (CSS `if()`, Grid Lanes etc.) | New CSS try kar rahe ho to |
+| **Browser Scores**       | Har browser ka overall score (Chrome 147: 443 etc.)              | Browsers compare karne ke liye |
+| **Settings Panel**       | Usage data change karo (country-wise, usage % threshold)         | Apne target audience ke hisab se |
+
+### Browser Support Table Colors (Sabse Important)
+
+| Color       | Matlab                                      | Kya Karna Chahiye? |
+|-------------|---------------------------------------------|--------------------|
+| **Green**   | Full Support (Achhe se kaam karta hai)      | Safe to use |
+| **Yellow**  | Partial Support (Kuch features kaam karte hain) | Test karo |
+| **Red**     | No Support (Bilkul nahi chalta)             | Alternative dhundo ya polyfill use karo |
+| **Grey / Others** | Prefix ya experimental support             | `-webkit-` etc. use kar sakte ho |
+
+**Tip:** Table mein "Usage relative" button dabao – cells browser usage ke hisab se badi-chhoti ho jati hain.
+
+### Kaise Use Karein? (Step-by-Step)
+
+1. **caniuse.com** pe jao
+2. Search bar mein feature type karo  
+   Examples:  
+   - `clamp`  
+   - `custom properties`  
+   - `css grid`  
+   - `min max clamp`  
+   - `view transitions`
+3. Feature page khulegi → support table dikhega
+4. Settings mein jaake apna country (Pakistan) ya usage % set kar sakte ho
+5. Mobile + Desktop dono tables check karo
+
+### Common CSS Features Jo Aap Check Kar Sakte Ho (Pehle wali Cheat Sheets ke hisab se)
+
+| Feature                        | Search Keyword on Caniuse          | Expected Status (2026) |
+|--------------------------------|------------------------------------|------------------------|
+| `calc()`                       | `calc`                             | Full support (old)    |
+| `min() / max() / clamp()`      | `clamp` or `minmax`                | Excellent support     |
+| Custom Properties (`--var`)    | `custom properties`                | Full support          |
+| `var()` function               | `var`                              | Full support          |
+| Flexbox                        | `flexbox`                          | Full support          |
+| CSS Grid                       | `css grid`                         | Full support          |
+| `gap` in Flexbox               | `flexbox gap`                      | Very good             |
+| Viewport units (`dvh`, `svh`)  | `viewport-unit-variants`           | Good                  |
+
+### Pro Tips (Developers Ke Liye)
+
+- **Target audience** Pakistan/India ho to global usage + mobile browsers zyada check karo.
+- Feature missing ho to GitHub pe suggest kar sakte ho.
+- **@supports** rule CSS mein use karo jab partial support ho:
+  ```css
+  @supports (width: clamp(1rem, 2vw, 2rem)) {
+    /* modern code */
+  }
+  ```
+- Real devices pe test karne ke liye **BrowserStack** integration hai site pe.
+- Third-party tools: Doiuse (CSS linting), I Want To Use (multiple features %).
+
+**Quick Access:**  
+Direct link → https://caniuse.com/
+
+**Example:** Agar aap `clamp()` use karna chahte ho to search karo "clamp" aur dekho ke Safari, Chrome, Firefox mein kab se full support hai.

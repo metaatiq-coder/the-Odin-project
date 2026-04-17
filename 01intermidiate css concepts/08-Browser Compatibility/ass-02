@@ -1,0 +1,74 @@
+### Main Problem (Asan Zaban Mein)
+Normal CSS mein agar koi value galat (invalid) ho, to browser turant purani value ignore kar deta hai aur fallback use kar leta hai.
+
+Lekin **Custom Properties (`--var`)** ke saath aisa nahi hota kyunki:
+
+- Pehle **cascade** resolve hota hai (kaunsi value final hai decide hoti hai).
+- Uske baad `var()` ko actual value mein convert kiya jata hai.
+- Agar final value invalid nikle, to browser purana fallback nahi la sakta – wo already discard ho chuka hota hai.
+
+Isliye error ka naam: **"Invalid at computed-value time"**
+
+### Normal Properties vs Custom Properties (Cascade Behavior)
+
+| Feature                              | Normal CSS Properties                          | Custom Properties (`--var` + `var()`)                  |
+|--------------------------------------|------------------------------------------------|-------------------------------------------------------|
+| Invalid value hone par               | Turant reject + fallback use                   | Cascade ke baad check → fallback nahi milta          |
+| Cascade kab hota hai                 | Value check ke saath                           | Pehle cascade, baad mein variable resolve            |
+| Fallback kaam karta hai?             | Haan (`color: red; color: invalid;`)           | Sirf `var(--color, fallback)` mein                     |
+| Error type                           | Syntax error (early)                           | Invalid at computed-value time                       |
+| Inherited value use hoti hai?        | Depend karta hai property pe                   | Agar invalid ho to inherited ya initial value         |
+
+### Practical Example from Article Concept
+
+```css
+:root {
+  --text-color: blue;
+}
+
+p {
+  color: var(--text-color);           /* Normal case → blue */
+}
+
+p.error {
+  --text-color: 12345;                /* Invalid value (number instead of color) */
+  color: red;                         /* Yeh fallback KAAM NAHI karega! */
+}
+```
+
+**Kya hoga?**  
+Paragraph ka color `red` nahi rahega balki inherited value (ya initial black) ho jayega.
+
+### Correct Way – Fallback Use Karo
+
+| Situation                                 | Sahi Tarika                                          | Example |
+|-------------------------------------------|------------------------------------------------------|--------|
+| Simple fallback                           | `var(--varname, default)`                            | `color: var(--text-color, black);` |
+| Nested fallback                           | `var(--a, var(--b, red))`                            | Multiple levels |
+| Invalid value avoid karne ke liye         | `@property` use karke type fix karo                  | `syntax: "<color>";` |
+| Safe default + inheritance                | `:root` pe default + local override                  | Best practice |
+
+### Key Takeaways & Advice
+
+- Custom properties **dynamic** hain lekin unki validation late hoti hai (computed value time).
+- Hamesha `var()` mein **fallback value** dena achha practice hai.
+- Agar bohot complex logic hai to **`@property`** at-rule use karo – yeh type safety deta hai aur initial-value bhi set kar sakte ho.
+- Cascade samajhna zaroori hai kyunki custom properties normal properties se alag tarike se kaam karte hain.
+- Yeh behavior browser mein consistent hai (spec ke mutabiq).
+
+### Quick Tips
+
+1. Har `var()` ke saath fallback zaroor rakho.
+2. Private variables (`--_private`) + public variables ka pattern use karo (jaise pehle Kevin Powell video mein bataya tha).
+3. Agar color, length, number waghera fix karna hai to `@property` best hai.
+4. Testing mein kabhi-kabhi invalid values daal ke dekho ke kya ho raha hai.
+
+Yeh cheat sheet aapki pehli **Inheritance of Custom Properties** aur **Advanced Variables (Kevin Powell)** wali sheets ke saath perfectly fit hoti hai.
+
+Ab aapke paas hai:
+- CSS Functions
+- min()/max()/clamp()
+- Custom Properties Inheritance
+- Advanced Component Pattern
+- Cascade + Invalid Value Behavior
+- CanIUse for support check
