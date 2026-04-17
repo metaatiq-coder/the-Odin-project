@@ -1,0 +1,120 @@
+### Basic Syntax
+
+```html
+<div 
+  data-user-id="1456"
+  data-role="admin"
+  data-is-active="true"
+  data-price="49.99"
+  data-product-name="Wireless Headphones">
+  Content here...
+</div>
+```
+
+**Rules:**
+- Hamesha `data-` se shuru hona chahiye
+- Dashes (`-`) allowed hain (kebab-case best practice)
+- Values strings hote hain (numbers, booleans bhi string ke roop mein save hote hain)
+
+### 1. JavaScript Mein Access Karna (Sabse Common)
+
+```js
+const card = document.querySelector('.card');
+
+// Get value
+console.log(card.dataset.userId);        // "1456"
+console.log(card.dataset.role);          // "admin"
+console.log(card.dataset.isActive);      // "true" (string)
+console.log(card.dataset.price);         // "49.99"
+
+// Set value
+card.dataset.status = "verified";
+
+// Remove attribute
+delete card.dataset.price;
+```
+
+**Note:** 
+- `dataset` object camelCase mein convert karta hai (`data-user-id` → `userId`)
+- Values **hamesha string** mein milte hain
+
+### 2. CSS Mein Use Karna (Very Powerful)
+
+```css
+/* Style based on data attribute */
+div[data-role="admin"] {
+  border-left: 5px solid #0066ff;
+  background: #f0f8ff;
+}
+
+/* Using attribute selector */
+[data-is-active="true"] {
+  opacity: 1;
+}
+
+[data-is-active="false"] {
+  opacity: 0.6;
+  filter: grayscale(80%);
+}
+```
+
+### 3. Real-World Practical Examples
+
+**Example 1: Delete Confirmation Button**
+
+```html
+<button 
+  data-action="delete"
+  data-id="789"
+  data-name="Project Alpha">
+  Delete
+</button>
+```
+
+```js
+document.querySelectorAll('button[data-action="delete"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.id;
+    const name = btn.dataset.name;
+    
+    if (confirm(`Delete ${name}?`)) {
+      deleteItem(id);
+    }
+  });
+});
+```
+
+**Example 2: Theme Switcher**
+
+```html
+<div data-theme="dark">...</div>
+```
+
+```css
+[data-theme="dark"]  { background: #1e2937; color: white; }
+[data-theme="light"] { background: white; color: #1e2937; }
+```
+
+### 4. Best Practices
+
+- **Semantic** naam rakho: `data-user-id`, `data-product-price`, `data-status`
+- BoHot saare data attributes mat daalo (performance impact pad sakta hai)
+- `dataset` object use karo instead of `getAttribute()`
+- Numbers aur booleans ko JavaScript mein properly convert karo:
+
+```js
+const price = parseFloat(card.dataset.price);
+const isActive = card.dataset.isActive === "true";
+```
+
+### 5. When to Use `data-*` Attributes?
+
+**Use Karo Jab:**
+- Extra metadata store karna ho (ID, status, price, type)
+- JavaScript ko configuration deni ho
+- CSS ke through conditional styling chahiye
+- Custom components banana ho (tabs, accordions, modals)
+
+**Avoid Karo Jab:**
+- Styling ke liye (classes ya CSS variables better hain)
+- Sensitive / secret data store karna ho (security risk)

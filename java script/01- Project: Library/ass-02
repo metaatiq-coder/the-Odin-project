@@ -1,0 +1,90 @@
+### Simple Definition
+
+`preventDefault()` batata hai browser ko:  
+**“Jo default action hone wali thi, usko mat karo.”**
+
+### Common Real-World Examples
+
+| Event                          | Default Behavior                          | preventDefault() kya karta hai? |
+|-------------------------------|-------------------------------------------|---------------------------------|
+| Form Submit                   | Page reload / redirect                    | Form submit hone se rokta hai |
+| Link (`<a>`) Click            | Page pe navigate karta hai                | Link follow hone se rokta hai |
+| Right Click (Context Menu)    | Context menu kholta hai                   | Right-click menu rokta hai |
+| Checkbox / Radio Click        | Automatically check/uncheck               | Check hone se rok sakta hai |
+| Drag & Drop                   | Default drag behavior                     | Custom drag-drop control |
+| Touch / Scroll events         | Page scroll                               | Custom scroll logic |
+
+### Basic Syntax
+
+```js
+element.addEventListener('eventName', function(event) {
+  event.preventDefault();     // Default action rok diya
+  // ab aap apna custom code likh sakte ho
+});
+```
+
+### Practical Examples
+
+**1. Form Submit Rokna (Sabse Common)**
+
+```html
+<form id="myForm">
+  <input type="text" required>
+  <button type="submit">Submit</button>
+</form>
+```
+
+```js
+const form = document.getElementById('myForm');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();        // Page reload rok diya
+
+  // Ab aap apna custom validation + AJAX call kar sakte ho
+  console.log("Form submitted without reload");
+});
+```
+
+**2. Link Click Rokna**
+
+```js
+const link = document.querySelector('a');
+
+link.addEventListener('click', function(e) {
+  e.preventDefault();        // Link follow nahi hoga
+  alert("Link clicked but page didn't change");
+});
+```
+
+**3. Right Click Disable (Context Menu)**
+
+```js
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  alert("Right click is disabled on this page");
+});
+```
+
+### Important Points (Must Remember)
+
+- `preventDefault()` sirf **default browser behavior** rokta hai. Event bubbling ko nahi rokta.
+- Agar aap bubbling bhi rokna chahte ho to `event.stopPropagation()` use karo.
+- `preventDefault()` ko sirf **cancelable events** pe hi asar hota hai.
+  - Check kar sakte ho: `event.cancelable` (true/false)
+
+### When to Use `preventDefault()`?
+
+- Form submit karte waqt (AJAX ke saath)
+- Custom dropdowns, modals, tabs
+- Drag & Drop functionality
+- Keyboard shortcuts (e.g., Ctrl+S)
+- Anchor tags jo JavaScript se handle hote hain
+
+### Best Practice
+
+```js
+button.addEventListener('click', (e) => {
+  if (someCondition) {
+    e.preventDefault();     // Sirf tab rokna jab zaruri ho
+  }
+});
