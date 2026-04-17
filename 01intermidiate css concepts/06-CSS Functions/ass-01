@@ -1,0 +1,57 @@
+### 1. Math Functions (Sab se zyada use hote hain)
+
+| Function          | Asan Description                          | Example |
+|-------------------|-------------------------------------------|---------|
+| `calc()`          | Do numbers ka hisaab ( +, -, *, / )       | `width: calc(100% - 20px)` |
+| `min()`           | Sab se chhoti value pick karega            | `font-size: min(16px, 4vw)` |
+| `max()`           | Sab se badi value pick karega             | `width: max(300px, 50%)` |
+| `clamp()`         | Min aur Max ke beech value rakhega        | `font-size: clamp(14px, 2.5vw, 22px)` |
+| `abs()`           | Negative ko positive bana deta hai        | `left: abs(-10px)` |
+
+### 2. Transform Functions (Element ko move, rotate, scale karne ke liye)
+
+| Function            | Asan Description                          | Example |
+|---------------------|-------------------------------------------|---------|
+| `translateX()`      | Left-right move                           | `transform: translateX(50px)` |
+| `translateY()`      | Up-down move                              | `transform: translateY(-20px)` |
+| `translate()`       | X aur Y dono move                         | `transform: translate(30px, 40px)` |
+| `rotate()`          | Ghumana (degree mein)                     | `transform: rotate(45deg)` |
+| `scale()`           | Chhota-bada karna                         | `transform: scale(1.5)` |
+| `scaleX()` / `scaleY()` | Sirf width ya height change             | `transform: scaleX(2)` |
+| `skew()`            | Tedha karna (slant)                       | `transform: skew(20deg)` |
+| `perspective()`     | 3D effect ke liye depth                   | `perspective: 500px` |
+
+**Tip:** Sab transform functions `transform:` property ke andar use hote hain.
+
+### 3. Filter Functions (Images aur elements ko special effects)
+
+| Function          | Asan Description                          | Example |
+|-------------------|-------------------------------------------|---------|
+| `blur()`          | Dhundla karna                             | `filter: blur(5px)` |
+| `brightness()`    | Ujla ya dhundla banana                    | `filter: brightness(120%)` |
+| `contrast()`      | Contrast badhana                          | `filter: contrast(150%)` |
+| `grayscale()`     | Black & White banana                      | `filter: grayscale(100%)` |
+| `hue-rotate()`    | Rang badalna                              | `filter: hue-rotate(90deg)` |
+| `invert()`        | Colors ulta karna                         | `filter: invert(80%)` |
+| `opacity()`       | Halka (transparent) banana                | `filter: opacity(0.6)` |
+| `drop-shadow()`   | Shadow lagana                             | `filter: drop-shadow(4px 4px 8px black)` |
+
+### 4. Color Functions
+
+| Function     | Asan Description                              | Example |
+|--------------|-----------------------------------------------|---------|
+| `rgb()`      | Red, Green, Blue se color                     | `color: rgb(255, 99, 71)` |
+| `rgba()`     | RGB + Transparency                            | `background: rgba(0, 0, 0, 0.5)` |
+| `hsl()`      | Hue, Saturation, Lightness (asaan color)      | `color: hsl(200, 80%, 50%)` |
+| `hsla()`     | HSL + Transparency                            | `color: hsla(200, 80%, 50%, 0.7)` |
+
+### 5. Misc / Important Functions
+
+| Function       | Asan Description                                   | Example |
+|----------------|----------------------------------------------------|---------|
+| `var()`        | Custom property (variable) use karna               | `color: var(--main-color)` |
+| `attr()`       | HTML attribute ki value lena                       | `content: attr(data-text)` |
+| `url()`        | Image, font ya SVG ka link dena                    | `background: url(image.jpg)` |
+| `linear-gradient()` | Rang ka smooth gradient                         | `background: linear-gradient(to right, red, blue)` |
+| `radial-gradient()` | Gol gradient                                   | `background: radial-gradient(circle, yellow, red)` |
+| `conic-gradient()`  | Circular (pie) gradient                         | `background: conic-gradient(red, yellow, green)` |
