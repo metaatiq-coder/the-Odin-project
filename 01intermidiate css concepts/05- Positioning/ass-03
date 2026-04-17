@@ -1,0 +1,19 @@
+| Feature                        | `position: fixed`                                      | `position: sticky`                                           |
+|--------------------------------|--------------------------------------------------------|-------------------------------------------------------------|
+| Kaise Kaam Karta Hai          | Screen (viewport) ke hisaab se hamesha fixed rehta hai | Normal scroll karta hai jab tak offset tak na pahunche, phir fixed ban jata hai |
+| Scrolling Behavior            | Scroll karne pe bhi jagah nahi badalta                 | Offset tak scroll karta hai, uske baad chipak jata hai      |
+| Document Flow                 | Flow se bahar (koi space nahi leta)                    | Flow mein rehta hai jab tak sticky na ho jaye               |
+| Containing Block              | Viewport (browser window)                              | Apne parent ke andar tak limited                            |
+| Parent Scroll Hone Pe         | Hamesha screen pe rehta hai                            | Parent scroll off ho jaye to sticky element bhi chala jata hai |
+| Offset (top, right, etc.)     | Haan, screen se measure karta hai                      | Haan, parent ke andar se measure karta hai                  |
+| Common Use Cases              | Hamesha visible rehne wale elements (header, floating button, chat widget) | Scroll ke baad chipakne wale elements (navbar, table header, sidebar) |
+
+### Quick Differences
+
+| Point                          | Fixed                                      | Sticky                                          |
+|--------------------------------|--------------------------------------------|-------------------------------------------------|
+| Hamesha fixed?                | Haan                                       | Sirf offset ke baad                             |
+| Parent se bahar ja sakta hai? | Haan                                       | Nahi (parent ke andar hi rehta hai)            |
+| Mobile pe dikkat              | Zyada                                      | Kam                                             |
+| Kab use karo                  | Element ko hamesha screen pe rakhna ho     | Element scroll kare aur phir ek jagah ruk jaye |
+

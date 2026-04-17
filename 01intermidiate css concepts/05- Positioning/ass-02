@@ -1,0 +1,14 @@
+| Position Value     | Simple Explanation                                      | Normal Flow Mein? | Positioning Context                  | top/right/bottom/left Kaam Karta Hai? | Common Use                          |
+|--------------------|---------------------------------------------------------|-------------------|--------------------------------------|---------------------------------------|-------------------------------------|
+| **static**        | Default. Element normal flow mein rehta hai            | Haan             | Normal document flow                | Nahi                                 | Normal text, paragraphs            |
+| **relative**      | Normal position pe rehta hai, lekin shift ho sakta hai | Haan             | Apni normal position se             | Haan                                 | Chhota adjustment, container       |
+| **absolute**      | Flow se bahar. Koi space nahi leta                     | Nahi             | Nearest positioned parent           | Haan                                 | Modal, dropdown, tooltip           |
+| **fixed**         | Viewport (screen) ke hisaab se fixed rehta hai         | Nahi             | Browser window                      | Haan                                 | Sticky header, floating button     |
+| **sticky**        | Scroll tak relative, phir fixed ban jata hai           | Haan (shuru mein)| Parent + Viewport                   | Haan                                 | Sticky navbar, table header        |
+
+### Quick Rules:
+- `static` → default, kuch nahi badalta
+- `relative` → khud shift + absolute child ke liye parent
+- `absolute` → parent mein `relative` lagao
+- `fixed` → screen pe fixed, scroll pe bhi
+- `sticky` → hybrid (relative + fixed)

@@ -1,0 +1,25 @@
+### CSS `position` Property Cheat Sheet
+
+| **static**        | Default position. Element normal tarike se page pe dikhta hai            | Haan                       | Nahi                                        | Normal text, headings, paragraphs        | Sabse common, z-index bhi nahi chalta |
+| **relative**      | Normal position pe rehta hai, lekin thoda upar-neeche ya left-right shift ho sakta hai | Haan                       | Haan (apni jagah se)                        | Chhota adjustment, fine tuning           | Dusre elements ko koi farak nahi padta |
+| **absolute**      | Normal flow se bahar ho jata hai. Koi space nahi leta. Parent ke hisaab se position hota hai | Nahi                       | Haan                                        | Dropdown, tooltip, modal, popup          | Parent ko `position: relative` dena zaroori hota hai |
+| **fixed**         | Screen (browser window) ke hisaab se fixed rehta hai. Scroll karne pe bhi nahi hilta | Nahi                       | Haan                                        | Sticky header, floating WhatsApp button, back-to-top button | Mobile mein kabhi problem aa sakta hai |
+| **sticky**        | Pehle relative ki tarah behave karta hai, phir scroll karte waqt fixed ban jata hai | Haan (shuru mein)          | Haan                                        | Sticky navbar, table header, sidebar     | Modern browsers mein achha kaam karta hai |
+
+### Quick Summary (Yaad Rakhne Ke Liye)
+
+| Position     | Flow Se Bahar? | Parent Pe Depend? | Scroll Pe Behavior          | Sabse Common Use Case                  |
+|--------------|----------------|-------------------|-----------------------------|----------------------------------------|
+| static       | Nahi           | Nahi              | Normal                      | Har normal element                     |
+| relative     | Nahi           | Nahi              | Normal                      | Thoda shift karna                      |
+| absolute     | Haan           | Haan              | Normal                      | Modal, dropdown, card badge            |
+| fixed        | Haan           | Nahi (Viewport)   | Fixed rehta hai             | Header, footer, floating button        |
+| sticky       | Thoda          | Haan              | Sticky ho jata hai          | Navigation bar, table heading          |
+
+### Sabse Important Rules (Yaad Rakho)
+
+1. **`position: static`** → Default hai, kuch mat likho to yahi hota hai.
+2. **`position: relative`** → Sirf khud ko move karna ho to best.
+3. **`position: absolute`** → Parent mein `position: relative` lagana almost hamesha zaroori hai.
+4. **`position: fixed`** → Pura screen ke hisaab se fix.
+5. **`position: sticky`** → Scroll karte waqt chipak jata hai (bahut easy sticky banane ke liye).
