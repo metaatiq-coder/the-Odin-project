@@ -1,0 +1,80 @@
+### Core Idea (Asan Zaban Mein)
+- Global variables (`:root`) → sirf defaults ke liye theek hain.
+- **Local variables** → component ke andar define karo (jaise `.card`, `.plan`).
+- Custom properties **inherit** karte hain → child elements automatically use kar lete hain.
+- **Pseudo-private properties** trick: `--_shadow` (private) aur `var(--shadow)` (public) use karo.
+
+### Normal vs Smart Way
+
+| Normal Tarika (Waste)                          | Smart Tarika (Kevin Powell Style)                          | Fayda |
+|------------------------------------------------|------------------------------------------------------------|-------|
+| `:root` mein sab define karo                   | Component pe local variables define karo                   | Kam repetition |
+| Har variant ke liye naye selectors likho       | Sirf modifier class mein variable change karo              | Code bohot chhota |
+| `box-shadow` ko har jagah pura likho           | `box-shadow: 0 10px 20px var(--shadow);`                   | Ek jagah change → sab update |
+| Bahut saare descendant selectors (`.plan .icon`) | Parent pe variable set karo, children inherit kar lenge    | Clean CSS |
+
+### Best Pattern – Pseudo Private Properties
+
+```css
+.plan {
+  /* Local defaults (private with _) */
+  --_color: #0066ff;
+  --_shadow: 0 10px 20px rgb(0 0 0 / 0.1);
+
+  /* Public variables with fallback */
+  --color: var(--_color);
+  --shadow: var(--_shadow);
+}
+
+/* Use karte waqt */
+.plan {
+  color: var(--color);
+  box-shadow: var(--shadow);
+}
+```
+
+### Modifier Classes (Variations Banana Bohot Asaan)
+
+| Modifier Class              | Example Code                                      | Kya Hota Hai? |
+|-----------------------------|---------------------------------------------------|---------------|
+| `.plan--pram`               | `--_color: #ff6600;`                              | Sirf color change, baaki sab inherit |
+| `.plan--bike`               | `--_shadow: 0 15px 30px rgb(0 100 0 / 0.2);`     | Shadow change ho jata hai pura component mein |
+| `.plan--lightspeed`         | `--_color: #00ccff; --_shadow: ...`               | Naya variant sirf 2-3 lines mein |
+
+**Result:** Naya card variant banana ho to sirf ek modifier class add karo aur variables change karo. Internal elements (icon, text, button) ko touch nahi karna padta.
+
+### Key Benefits (Video ke Highlights)
+
+- **Inheritance ka full faida** → Variables parent se children tak automatically chale jate hain.
+- **Fallbacks** → Agar local value nahi hai to `:root` ya default use ho jata hai.
+- **Kam selectors** → `.plan--pram .icon { color: red; }` ki jagah sirf parent pe variable set karo.
+- **Box-shadow** jaise complex values ko asaan banana → sirf color part variable mein rakho.
+- **Theming aur variations** bohot tez ho jati hain.
+
+### Quick Tips from Video
+
+1. Private variables `--_` prefix se shuru karo (convention).
+2. Public variables banao jo fallback ke saath `var(--_private)` use karein.
+3. Modifier classes mein sirf zaruri variables override karo.
+4. Yeh technique **component-based** design (Card, Button, Plan etc.) ke liye perfect hai.
+5. Code maintain karna bohot asaan ho jata hai – future mein changes sirf ek jagah.
+
+### Example Structure
+
+```css
+:root {
+  --primary: #0066ff;        /* Global default */
+}
+
+.plan {
+  --_color: var(--primary);   /* Local default */
+  --_shadow: 0 10px 20px rgb(0 0 0 / 0.15);
+
+  --color: var(--_color);
+  --shadow: var(--_shadow);
+}
+
+.plan--special {
+  --_color: #ff0066;
+  --_shadow: 0 20px 40px rgb(255 0 102 / 0.3);
+}

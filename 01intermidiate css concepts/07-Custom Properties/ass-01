@@ -1,0 +1,74 @@
+### Basic Rule (Sabse Important)
+Custom properties (`--var-name`) **hamesha inherit** karte hain parent element se.  
+Matlab: Agar parent mein value hai, to child automatically use kar lega (jab tak child khud override na kare).
+
+### Normal CSS Properties vs Custom Properties
+
+| Feature                        | Normal CSS Properties          | Custom Properties (`--var`)              |
+|--------------------------------|--------------------------------|------------------------------------------|
+| Inheritance by default         | Kuch properties inherit, kuch nahi | **Hamesha inherit** karte hain          |
+| Defined on                     | Specific property              | `--` prefix se kisi bhi element pe      |
+| Global banane ke liye          | Alag-alag likhna padta hai     | `:root` pe define karo                  |
+| Value resolve kab hota hai     | Declaration time               | **Use time** (`var()` ke time)          |
+| Override karna                 | Specificity se                 | Child element pe nayi value likho       |
+
+### Inheritance Ka Practical Example
+
+```css
+.one   { background: var(--box-color); }   /* koi value nahi → invalid */
+.two   { --box-color: teal; }
+.three { --box-color: pink; }
+.four  { /* koi definition nahi */ }
+```
+
+**Result:**
+- `.one` → koi color nahi (invalid)
+- `.two` → **teal** (khud define kiya)
+- `.three` → **pink** (parent ko override kiya)
+- `.four` → **teal** (`.two` se inherit kiya)
+
+### Quick Reference Table
+
+| Situation                                      | Kya Hoga?                                      | Solution / Example |
+|------------------------------------------------|------------------------------------------------|--------------------|
+| Global variables banana                        | `:root` pe define karo                         | `:root { --main-color: blue; }` |
+| Child element override kare                    | Child mein nayi value likho                    | `.card { --main-color: red; }` |
+| Variable parent mein nahi hai                  | Fallback use hota hai ya invalid              | `color: var(--main-color, black);` |
+| Variable kisi ancestor mein hai                | Child inherit kar lega                         | Automatic hota hai |
+| Inheritance rokna hai                          | `@property` use karo                           | `inherits: false;` |
+| Default value set karna                        | `@property` mein `initial-value`               | `initial-value: teal;` |
+| Type safety + better control                   | `@property` at-rule use karo                   | `syntax: "<color>";` |
+
+### `@property` vs Normal `--` Custom Property
+
+| Feature                  | Normal `--var`                     | `@property --var`                          |
+|--------------------------|------------------------------------|--------------------------------------------|
+| Inheritance              | Hamesha `true`                     | `inherits: true` ya `false` (control)     |
+| Initial / Default value  | Nahi hota (sirf fallback)          | `initial-value: ...` set kar sakte ho     |
+| Type checking            | Koi nahi                           | `syntax: "<color>";` ya `<length>` etc.   |
+| Kab use karna chahiye    | Normal cases mein                  | Advanced cases (theme, animation, safety) |
+
+### Best Practices (Asan Tips)
+
+1. **Global variables** ke liye hamesha `:root` use karo.
+2. **Component level** variables ke liye parent class (jaise `.card`, `.button`) pe define karo.
+3. Fallback hamesha do: `var(--color, #ccc)`
+4. Nested fallback bhi chalte hain: `var(--a, var(--b, red))`
+5. Variable names **case-sensitive** hain → `--MainColor` aur `--maincolor` alag hain.
+6. Variables sirf **values** ke liye use hote hain (property name, selector, media query mein nahi).
+
+### Quick Syntax Reminder
+
+```css
+/* Normal tarika */
+:root {
+  --primary: #0066ff;
+  --spacing: 1.5rem;
+}
+
+/* Advanced tarika (@property) */
+@property --primary {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0066ff;
+}
