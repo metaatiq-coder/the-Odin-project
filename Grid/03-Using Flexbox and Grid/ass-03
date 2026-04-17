@@ -1,0 +1,57 @@
+### Core Difference
+
+| Feature                  | **Flexbox**                                      | **CSS Grid**                                          |
+|--------------------------|--------------------------------------------------|-------------------------------------------------------|
+| **Dimension**            | **1D** (sirf ek direction – row ya column)       | **2D** (rows + columns dono ek saath)                 |
+| **Focus**                | Content flow (items content ke hisab se adjust hote hain) | Precise placement (layout pehle define, items usme fit hote hain) |
+| **Wrapping**             | `flex-wrap` se multiple lines, content-driven     | Auto-placement + responsive without many media queries |
+| **Gap**                  | Native nahi (negative margin hack lagta tha)     | Native `gap` / `grid-gap` (bahut clean)               |
+| **Alignment**            | Items ke beech spacing aur alignment mein strong | Dono axes (horizontal + vertical) mein perfect control |
+| **Spanning Items**       | Mushkil                                          | Bahut asaan (`grid-column: span 2;`)                  |
+
+### Kab Kya Use Karein? (Decision Guide)
+
+**Flexbox Use Karo Jab:**
+- Content-driven layout chahiye (items ka size content ke hisab se badle)
+- Simple alignment (center, space-between, stretch)
+- Navigation menus, button groups, card ke andar content
+- Items ko wrap karna ho aur flexible space distribution chahiye
+- Sticky footer, equal height in one direction
+
+**CSS Grid Use Karo Jab:**
+- Precise 2D structure chahiye (overall page layout)
+- Card grids, image galleries, dashboards
+- Items ko multiple rows/columns mein span karna ho
+- Responsive layouts with fewer media queries (`auto-fit` + `minmax()`)
+- Asymmetrical ya complex overlapping designs
+
+**Hybrid Approach (Sabse Recommended):**
+- **Badi structure** (page layout) → **Grid**
+- **Chhote components** (card ke andar, nav items) → **Flexbox**
+
+**Example:**
+```css
+/* Outer layout - Grid */
+.page {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+}
+
+/* Inner component - Flexbox */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+```
+
+### Pros & Cons
+
+**Flexbox**
+- **Pros**: Content ke hisab se flexible, alignment bohot easy, purane browsers mein better support
+- **Cons**: 2D control limited, gap ke liye hack, kabhi unexpected behavior
+
+**CSS Grid**
+- **Pros**: True 2D control, native gap, powerful responsive (auto-fit), clean code
+- **Cons**: Purane browsers (IE) mein support weak tha (ab 2026 mein almost perfect)

@@ -1,0 +1,66 @@
+### 1. Core Difference (Video ke hisab se)
+
+| Aspect                  | **Flexbox**                                      | **Grid**                                          |
+|-------------------------|--------------------------------------------------|---------------------------------------------------|
+| Dimension               | **1D** (sirf ek direction – row ya column)       | **2D** (rows + columns dono control)              |
+| Control karta hai       | Items ka behavior (grow, shrink, wrap)           | Overall structure (parent controls everything)    |
+| Best jab                | Content apne aap adjust ho (intrinsic sizing)    | Fixed/rigid layout chahiye (explicit structure)   |
+| Alignment               | Items ke beech spacing aur alignment bohot easy  | Both directions mein perfect alignment            |
+| Spanning                | Mushkil                                          | Bahut asaan (`span`, `grid-column`)               |
+| Responsive              | Media queries zyada lagte hain                   | `auto-fit` + `minmax()` se kam media queries     |
+
+### 2. Kab Flexbox Use Karo? (When to choose Flexbox)
+
+- Navigation menus (horizontal/vertical)
+- Buttons group, icon + text alignment
+- Card ke andar content align karna (title, description, button)
+- Jab items ko **wrap** karna ho aur unka size content ke hisab se badle
+- Centering ek single item ya group
+- Jab aapko **items** ko control karna ho (na ki pura layout)
+
+**Kevin ka Rule:** Agar aap soch rahe ho “yeh items ko aise align karna hai”, to Flexbox best hai.
+
+### 3. Kab Grid Use Karo? (When to choose Grid)
+
+- Poora page layout (header, sidebar, main, footer)
+- Card grids / image galleries
+- Jab aapko **columns aur rows** dono ko ek saath define karna ho
+- Equal height columns chahiye
+- Items ko span karna ho (ek item 2-3 columns cover kare)
+- Complex 2D layouts (dashboard, holy grail)
+
+**Kevin ka Rule:** Agar aap soch rahe ho “pura layout aisa hona chahiye”, to Grid best hai.
+
+### 4. Best Practice – Mix Flexbox + Grid (Video ka Sabse Important Part)
+
+```css
+/* Outer structure → Grid */
+.page {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-areas: "sidebar main";
+  gap: 2rem;
+}
+
+/* Inner components → Flexbox */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+```
+
+Yeh hybrid approach aaj kal sabse modern aur recommended hai.
+
+### Quick Decision Table (Yaad rakhne ke liye)
+
+| Aapka Sawal                              | Choose This     |
+|------------------------------------------|-----------------|
+| Sirf horizontal ya vertical alignment?   | Flexbox         |
+| Pura page ya section ka structure?       | Grid            |
+| Cards / Gallery bana rahe ho?            | Grid            |
+| Nav menu, buttons, icons?                | Flexbox         |
+| Items ko equal height chahiye?           | Grid            |
+| Ek item ko multiple columns mein failana hai? | Grid       |
+| Content-driven (items apne aap adjust hon) | Flexbox      |
+| Layout-driven (parent decide kare)       | Grid            |
