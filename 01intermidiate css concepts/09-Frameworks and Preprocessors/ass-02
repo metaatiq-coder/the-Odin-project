@@ -1,0 +1,123 @@
+### CSS Preprocessor Kya Hai? (Simple Definition)
+CSS Preprocessor ek tool hai jo **normal CSS** ko extend karta hai. Isme variables, nesting, mixins, loops, functions jaise programming features add ho jate hain.  
+Aap preprocessor mein code likhte ho → **compile** karke normal CSS ban jata hai (browsers sirf normal CSS samajhte hain).
+
+**Kyuu Use Karein?**  
+- Code reusable aur clean ban jata hai  
+- Badi projects mein maintenance asaan  
+- Repetitive code kam hota hai  
+- Lekin har naye feature ke liye compile karna padta hai
+
+**Note (2026 mein):** Native CSS mein ab bohot features aa gaye hain (`var()`, `clamp()`, `calc()`, nesting in modern browsers), isliye chhoti projects mein preprocessor ki zarurat kam ho rahi hai. Badi/complex projects mein ab bhi Sass sabse popular hai.
+
+### Sass vs LESS vs Stylus – Quick Comparison
+
+| Aspect              | **Sass / SCSS**                                      | **LESS**                                            | **Stylus**                                          |
+|---------------------|------------------------------------------------------|-----------------------------------------------------|-----------------------------------------------------|
+| **Popularity (2026)** | Sabse zyada (80%+ share)                             | Medium (purane projects mein)                       | Bahut kam (niche, Node.js lovers)                   |
+| **Syntax**          | SCSS (CSS jaisa – braces & semicolons) ya .sass (indentation) | CSS jaisa (.less)                                   | Sabse flexible (braces, colons, semicolons optional) |
+| **Variable**        | `$var: value;`                                       | `@var: value;`                                      | `var = value`                                       |
+| **Nesting**         | Full support (`&` for parent)                        | Full support                                        | Full support                                        |
+| **Mixins**          | `@mixin` + `@include`                                | `.mixin()` jaise class                              | Function style (no @ or $)                          |
+| **Inheritance**     | `@extend` + placeholders (`%`) – best                | Mixins se similar                                   | Mixins/functions se                                 |
+| **Loops & Conditionals** | Full (@for, @if, @each) – sabse powerful            | Limited loops, no real conditionals                 | Built-in functions se powerful logic                |
+| **Functions**       | Bahut advanced color/math functions                  | Basic functions                                     | Sabse powerful built-in functions                   |
+| **Learning Curve**  | Medium (SCSS asaan)                                  | Sabse asaan (CSS jaisa)                             | Low-Medium (flexible syntax)                        |
+| **Community**       | Sabse badi + active                                  | Medium                                              | Chhoti (Node.js ecosystem)                          |
+| **Best For**        | Large projects, Bootstrap, complex logic             | Quick setup, JS-heavy projects                      | Flexible syntax, Node.js stack                      |
+| **Cons**            | Compile step zaroori                                 | Features kam (Bootstrap ne bhi switch kar liya)     | Community chhoti, kam updates                       |
+
+**Recommendation from Article:**  
+- **Naye projects** ke liye → **Sass/SCSS** best choice hai (community, features, support ke wajah se).  
+- Simple/legacy project → LESS  
+- Node.js + maximum flexibility → Stylus
+
+### Practical Syntax Examples (Same Code ke 3 Tarike)
+
+**1. Variables**
+
+- **Sass (SCSS):**  
+  ```scss
+  $primary: #0066ff;
+  $spacing: 1.5rem;
+
+  .button {
+    color: $primary;
+    padding: $spacing;
+  }
+  ```
+
+- **LESS:**  
+  ```less
+  @primary: #0066ff;
+  @spacing: 1.5rem;
+
+  .button {
+    color: @primary;
+    padding: @spacing;
+  }
+  ```
+
+- **Stylus:**  
+  ```stylus
+  primary = #0066ff
+  spacing = 1.5rem
+
+  .button
+    color primary
+    padding spacing
+  ```
+
+**2. Nesting + Hover**
+
+- **Sass / LESS (dono similar):**  
+  ```scss
+  .card {
+    background: white;
+    &:hover {
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+  }
+  ```
+
+- **Stylus:**  
+  ```stylus
+  .card
+    background white
+    &:hover
+      box-shadow 0 10px 20px rgba(0,0,0,0.1)
+  ```
+
+**3. Mixins (Reusable Code)**
+
+- **Sass:**  
+  ```scss
+  @mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .box { @include flex-center; }
+  ```
+
+- **LESS:**  
+  ```less
+  .flex-center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .box { .flex-center(); }
+  ```
+
+- **Stylus:**  
+  ```stylus
+  flex-center()
+    display flex
+    justify-content center
+    align-items center
+
+  .box
+    flex-center()
