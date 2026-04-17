@@ -1,0 +1,65 @@
+- `grid-template-areas`
+- Named grid lines
+- `order` property
+- `justify-self` / `align-self`
+- Implicit vs Explicit grid
+- Complex responsive layouts
+- `minmax()`, `auto-fit`, `auto-fill` ka advanced use
+
+### Folder Structure (GitHub se)
+Yeh folder mein multiple small exercises hain (numbered jaise `grid-layout-1`, `grid-layout-2`, `grid-layout-3` etc.). Har exercise mein yeh files hoti hain:
+
+- `index.html` → Given markup (aapko sirf CSS likhna hota hai)
+- `style.css` → Aap yahan code likhoge
+- `README.md` → Instructions + Desired Outcome image
+- Solution folder (reference ke liye — pehle khud try karo!)
+
+### Main Exercises aur Concepts
+
+| Exercise              | Kya Banana Hai?                              | Key Grid Concepts Practiced |
+|-----------------------|----------------------------------------------|-----------------------------|
+| **grid-layout-1**     | Simple multi-column card layout              | `grid-template-columns`, `repeat()`, `gap`, `minmax()` |
+| **grid-layout-2**     | More complex layout with spanning            | `grid-column: span`, line-based placement |
+| **grid-layout-3**     | Advanced placement with areas                | `grid-template-areas`, named areas |
+| **Other exercises**   | Holy Grail variations, dashboards, etc.      | `order`, `align-self`, `justify-self`, responsive changes |
+
+**Learning Objectives (Lesson se):**
+- Grid ke advanced properties ko real layouts mein apply karna
+- `grid-template-areas` se visual aur readable layouts banana
+- Items ko individually align karna (`*-self`)
+- Complex responsive grids banana bina bohot saare media queries ke
+- Grid Inspector tool ka practical use
+
+### Recommended CSS Patterns (Common in These Exercises)
+
+1. **Using grid-template-areas (Sabse Clean)**
+```css
+.container {
+  display: grid;
+  grid-template-columns: 250px 1fr 300px;
+  grid-template-areas:
+    "sidebar main aside"
+    "sidebar main aside";
+  gap: 20px;
+}
+
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.aside   { grid-area: aside; }
+```
+
+2. **Responsive with auto-fit (Bohot Useful)**
+```css
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+```
+
+3. **Individual Item Alignment**
+```css
+.item {
+  justify-self: center;   /* horizontal */
+  align-self: end;        /* vertical */
+}
