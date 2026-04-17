@@ -1,0 +1,27 @@
+### Form Title
+**RoR/JS - Intermediate HTML and CSS feedback**
+
+### Form Ka Maqsad
+Curriculum ko better banane ke liye students se honest feedback lena.
+
+### Questions (Asan Summary)
+
+| # | Question (Exact) | Type | Notes |
+|---|------------------|------|-------|
+| 1 | Are there any improvements to this section of the curriculum that can be added to make the experience better? | Paragraph Text | Open feedback |
+| 2 | What are some points of the Intermediate HTML and CSS section that you **disliked**? | Paragraph Text | Negative points |
+| 3 | What are some favorite points of the HTML and CSS section that you **liked**? | Paragraph Text | Positive points |
+| 4 | Do you have any project suggestions, such as ones we should **add**, **remove** or **change**? | Paragraph Text | Project-related suggestions (Admin Dashboard, Sign-up Form, etc.) |
+| 5 | (Only for RoR path) Rate your experience with the Ruby on Rails path so far (1 = poor → 5 = great) | Linear Scale (1–5) | Conditional |
+| 6 | (Only for JS path) Rate your experience with the JavaScript path so far (1 = poor → 5 = great) | Linear Scale (1–5) | Conditional |
+
+**Sab questions optional** hain (koi bhi required nahi hai).
+
+### Tips – Achha Feedback Kaise Do (Agar aap fill kar rahe ho)
+
+- **Honest raho** – jo sach mein acha laga aur jo mushkil laga, dono batao.
+- **Specific examples** do (jaise "Admin Dashboard project mein Grid nesting samajhna mushkil tha" ya "Custom properties + clamp() wala part bohot helpful tha").
+- **Project suggestions** mein yeh common points de sakte ho:
+  - Admin Dashboard ko aur thoda complex banana
+  - Ek aur small project add karna (jaise landing page ya blog layout)
+  - More real-world component exercises (buttons, cards, modals)

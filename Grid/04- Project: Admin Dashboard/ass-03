@@ -1,0 +1,86 @@
+### Main Learning Objectives
+- Custom fonts (Google Fonts ya local fonts) ko project mein add karna
+- Text ko better control karne ke liye advanced CSS properties
+- Typography best practices samajhna (readability + aesthetics)
+
+### 1. Custom Fonts (Sabse Important Part)
+
+**Google Fonts (Sabse Asaan Tarika)**
+
+```html
+<!-- Head mein link add karo -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+```
+
+```css
+body {
+  font-family: 'Roboto', sans-serif;
+}
+```
+
+**Local Font (@font-face)**
+
+```css
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('fonts/MyFont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;   /* Performance ke liye best */
+}
+```
+
+**Fallback Font Stack (Best Practice)**
+
+```css
+font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+```
+
+### 2. Advanced Text Properties
+
+| Property                  | Asan Description                                      | Common Values / Example |
+|---------------------------|-------------------------------------------------------|-------------------------|
+| `font-weight`             | Text ki boldness                                      | `400` (normal), `500`, `700` (bold), `lighter`, `bolder` |
+| `font-style`              | Italic ya normal                                      | `italic`, `oblique`, `normal` |
+| `font-size`               | Text ka size                                          | `1.125rem`, `clamp(1rem, 2.5vw, 1.5rem)` |
+| `line-height`             | Lines ke beech vertical space (readability ke liye sabse important) | `1.6`, `1.8`, `2` |
+| `letter-spacing`          | Characters ke beech horizontal space                  | `0.5px`, `-0.5px`, `0.05em` |
+| `word-spacing`            | Words ke beech space                                  | `0.2em` |
+| `text-transform`          | Text ko uppercase, lowercase, capitalize karna        | `uppercase`, `lowercase`, `capitalize` |
+| `text-decoration`         | Underline, overline, line-through                    | `none`, `underline`, `line-through` |
+| `text-align`              | Text alignment                                        | `left`, `center`, `right`, `justify` |
+| `text-shadow`             | Text pe shadow lagana                                 | `2px 2px 4px rgba(0,0,0,0.3)` |
+| `font-variant`            | Small caps etc.                                       | `small-caps` |
+
+### Typography Best Practices (Lesson se Key Tips)
+
+- **Line-height**: Body text ke liye **1.5 – 1.8** best hota hai (bahut tight mat rakho).
+- **Font-size**: Base font size `16px` (1rem) rakho. Headings ke liye `clamp()` use karo.
+- **Font-weight**: Sirf 400, 500, 700 use karo – zyada weights bundle size badhate hain.
+- **Contrast**: Text aur background ke beech achha contrast rakho (accessibility ke liye).
+- **Custom Fonts**: Sirf 1–2 fonts use karo (ek heading ke liye, ek body ke liye).
+- **Performance**: `font-display: swap;` zaroor add karo taaki text FOUT (Flash of Unstyled Text) na ho.
+
+### Quick Example (Clean Typography)
+
+```css
+:root {
+  --heading-font: 'Playfair Display', serif;
+  --body-font: 'Roboto', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  max-width: 65ch;        /* Ideal reading width */
+}

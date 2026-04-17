@@ -1,0 +1,55 @@
+### Quick Start – Sabse Asaan Tarika (Webfont)
+
+**1. CDN se Include Karo (Head mein daalo)**
+
+```html
+<link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+```
+
+**2. Icon Use Karne Ka Tarika**
+
+```html
+<!-- Basic Icon -->
+<i class="mdi mdi-home"></i>
+
+<!-- With size & color -->
+<i class="mdi mdi-account-circle" 
+   style="font-size: 24px; color: #2196F3;"></i>
+
+<!-- Using built-in size classes -->
+<i class="mdi mdi-24px mdi-bell-outline"></i>
+```
+
+### Dashboard Ke Liye Sabse Common Icons
+
+| Icon Name                  | Class Name                          | Use Case |
+|---------------------------|-------------------------------------|----------|
+| Home                      | `mdi-home`                          | Sidebar Dashboard link |
+| User / Profile            | `mdi-account` / `mdi-account-circle` | User avatar, profile |
+| Settings                  | `mdi-cog` / `mdi-settings`          | Settings menu |
+| Notifications             | `mdi-bell` / `mdi-bell-outline`     | Bell icon |
+| Search                    | `mdi-magnify`                       | Search bar |
+| Menu / Hamburger          | `mdi-menu`                          | Mobile menu |
+| Dots Vertical             | `mdi-dots-vertical`                 | More options |
+| Plus / Add                | `mdi-plus`                          | Create new |
+| Trending / Star           | `mdi-star` / `mdi-trending-up`      | Trending section |
+| Message                   | `mdi-message` / `mdi-chat`          | Messages |
+| Logout                    | `mdi-logout`                        | Logout button |
+
+### Size aur Color Customize Karna
+
+```css
+.mdi {
+  font-size: 24px;        /* Default size */
+  color: #64748b;
+}
+
+/* Custom size classes bhi hain */
+.mdi-18px { font-size: 18px; }
+.mdi-24px { font-size: 24px; }
+.mdi-36px { font-size: 36px; }
+.mdi-48px { font-size: 48px; }
+```
+
+**Color ke liye** → normal `color` property use karo ya CSS variables (`--icon-color`).

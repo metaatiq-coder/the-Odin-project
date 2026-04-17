@@ -1,0 +1,105 @@
+### Overall Layout (Image ke mutabiq)
+
+**3 Main Sections:**
+
+1. **Left Sidebar** (Narrow, dark background)
+2. **Top Header** (Full width, light background)
+3. **Main Content Area** (Right + bottom – sabse bada hissa)
+
+**Typical Structure (jo image mein dikhta hai):**
+
+```
+┌───────────────────────┬──────────────────────────────────────────────┐
+│                       │                                              │
+│     SIDEBAR           │                HEADER                        │
+│   (Dark)              │  (Search + icons + user avatar)              │
+│   - Logo              │                                              │
+│   - Navigation links  ├──────────────────────────────────────────────┤
+│   (Dashboard, Profile,│                                              │
+│    Messages, etc.)    │                                              │
+│                       │            MAIN CONTENT                      │
+│                       │  - Welcome + "Hi, User"                      │
+│                       │  - Big Cards (Your Projects, Announcements)   │
+│                       │  - Trending section                          │
+│                       │                                              │
+└───────────────────────┴──────────────────────────────────────────────┘
+```
+
+### Detailed Breakdown (Design Elements)
+
+**1. Sidebar (Left)**
+- Dark background (usually black/very dark gray)
+- Top pe **Odin / Dashboard logo**
+- Vertical navigation menu:
+  - Dashboard (active)
+  - Profile
+  - Messages
+  - History
+  - Tasks
+  - Communities
+  - Settings
+- Bottom mein extra links (Help, Support, etc.)
+
+**2. Header (Top)**
+- Light background
+- Left side: **Search bar** (magnifying glass icon ke saath)
+- Right side:
+  - Notification bell icon
+  - + (add) button
+  - User avatar (circular)
+  - User name
+
+**3. Main Content Area**
+- Light/gray background
+- Top greeting: **"Hi, User"** + welcome message
+- **Your Projects** section → Multiple project cards (title, description, icons for comments/star)
+- **Announcements** card
+- **Trending** section (right side mein vertical list with avatars and names)
+
+**Color Scheme (Typical)**
+- Sidebar: Dark (#0f172a or similar)
+- Header & Main: White / Light gray
+- Accents: Blue / Purple (Odin branding)
+- Cards: White with subtle shadow
+
+### Best Way to Build It (Recommended Structure)
+
+```html
+<div class="dashboard">
+  <aside class="sidebar">...</aside>
+  
+  <header class="header">...</header>
+  
+  <main class="main-content">
+    <!-- Projects grid + Announcements + Trending -->
+  </main>
+</div>
+```
+
+**CSS – Main Grid Layout**
+
+```css
+.dashboard {
+  display: grid;
+  grid-template-columns: 280px 1fr;     /* Sidebar + Content */
+  grid-template-rows: auto 1fr;         /* Header + Main */
+  min-height: 100vh;
+}
+
+.sidebar {
+  grid-column: 1 / 2;
+  grid-row: 1 / -1;                     /* Full height */
+}
+
+.header {
+  grid-column: 2 / -1;
+  grid-row: 1 / 2;
+}
+
+.main-content {
+  grid-column: 2 / -1;
+  grid-row: 2 / -1;
+  display: grid;                        /* Nested Grid for cards */
+  grid-template-columns: 3fr 1fr;       /* Projects (bigger) + Trending (smaller) */
+  gap: 2rem;
+}
