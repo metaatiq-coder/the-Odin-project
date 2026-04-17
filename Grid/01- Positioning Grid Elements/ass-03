@@ -1,0 +1,108 @@
+### Project Goal
+Ek **Holy Grail Layout** banana hai using CSS Grid. Yeh classic layout hai jo bohot websites mein use hota hai:
+
+- **Header** (top bar)
+- **Footer** (bottom bar)
+- **Main Content** (center mein bada area)
+- **Sidebar** (left ya right mein)
+
+**Learning Objectives:**
+- `display: grid` use karna
+- `grid-template-columns` aur `grid-template-rows` define karna
+- Line-based placement (`grid-column`, `grid-row`, `span`)
+- `grid-template-areas` (optional but helpful)
+- `gap` for spacing
+- Responsive behaviour (media queries)
+
+### Folder Structure (GitHub se)
+- `01-basic-holy-grail/`
+  - `index.html` (given markup)
+  - `style.css` (aap yahan code likhoge)
+  - `README.md` (instructions + Desired Outcome image)
+  - Solution folder (reference ke liye, pehle mat dekho!)
+
+### Holy Grail Layout – Target Design
+Typical structure jo aapko banana hai:
+
+```
+Header (full width)
+────────────────────
+Sidebar | Main Content
+        |
+        |
+Footer (full width)
+```
+
+### Recommended CSS Solution (Step-by-Step)
+
+```css
+/* 1. Grid Container */
+.holy-grail {
+  display: grid;
+  grid-template-columns: 250px 1fr;     /* Sidebar + Main */
+  grid-template-rows: auto 1fr auto;    /* Header + Content + Footer */
+  min-height: 100vh;
+  gap: 20px;
+}
+
+/* 2. Using Line-based Placement */
+.header {
+  grid-column: 1 / -1;        /* Full width (line 1 se last line tak) */
+}
+
+.sidebar {
+  grid-column: 1 / 2;         /* First column */
+}
+
+.main {
+  grid-column: 2 / 3;         /* Second column */
+}
+
+.footer {
+  grid-column: 1 / -1;        /* Full width */
+}
+```
+
+### Alternative (Using grid-template-areas – Cleaner)
+
+```css
+.holy-grail {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "sidebar main"
+    "footer";
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+  min-height: 100vh;
+}
+
+.header   { grid-area: header; }
+.sidebar  { grid-area: sidebar; }
+.main     { grid-area: main; }
+.footer   { grid-area: footer; }
+```
+
+### Responsive Tip (Mobile pe)
+```css
+@media (max-width: 768px) {
+  .holy-grail {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main"
+      "sidebar"
+      "footer";
+  }
+}
+```
+
+### Self-Check List (README ke mutabiq)
+- Layout exactly desired image jaisa ho
+- Header aur Footer full width hon
+- Sidebar fixed width (ya flexible) ho
+- Main content remaining space le
+- Gap properly set ho
+- Page full height cover kare (`min-height: 100vh`)
+- Mobile pe responsive ho (stack ho jaye)

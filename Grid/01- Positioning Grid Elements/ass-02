@@ -1,0 +1,39 @@
+### Game Ka Basic Idea
+- Garden ek Grid hai.
+- Aap CSS likhte ho `.water { ... }` mein.
+- Code likhte hi live preview mein changes dikhte hain.
+- Sahi code likhne pe carrots green ho jate hain aur level clear!
+
+### Levels ke Hisab se Concepts (Progressive)
+
+| Levels       | Main Concept Taught                              | Key Properties |
+|--------------|--------------------------------------------------|----------------|
+| 1–2          | Starting position                                | `grid-column-start` |
+| 3–6          | Ending position + Negative lines                 | `grid-column-end`, negative numbers (`-1`, `-2`) |
+| 7–9          | Spanning multiple tracks                         | `span` keyword (`grid-column-end: span 2;`) |
+| 10–11        | Shorthand for column                             | `grid-column: start / end;` |
+| 12–15        | Row placement                                    | `grid-row-start`, `grid-row-end`, `grid-row: span` |
+| 16–20        | Full shorthand + Combining row & column          | `grid-area: row-start / column-start / row-end / column-end;` |
+| 21–25        | Advanced placement, `order` property, alignment  | `order`, `justify-self`, `align-self` |
+| 26–28        | Complex layouts, `grid-template-columns/rows`, implicit grids | Full control |
+
+### Sabse Important Syntax (Game Mein Zyada Use Hone Wali)
+
+1. **Column Placement**
+   - `grid-column-start: 3;` → 3rd vertical line se shuru
+   - `grid-column-end: 6;`   → 6th line pe khatam
+   - `grid-column: 2 / 5;`   → shorthand (start / end)
+
+2. **Span (Sabse Powerful)**
+   - `grid-column: span 3;` → 3 columns cover karo
+   - `grid-column-end: span 2;`
+
+3. **Row Placement**
+   - `grid-row: 2 / span 3;`
+
+4. **Full Area (Shorthand)**
+   - `grid-area: 1 / 2 / 4 / 5;`  
+     (row-start / column-start / row-end / column-end)
+
+5. **Negative Lines**
+   - `grid-column: 1 / -1;` → poori width (first se last line tak)
