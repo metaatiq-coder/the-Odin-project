@@ -1,0 +1,146 @@
+### 1. Closure Kya Hai? (MDN Definition)
+
+> **A closure** is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).
+
+Matlab:  
+Ek function apne outer scope ke variables ko “pakad” ke rakhta hai, bhale hi woh outer function khatam ho chuka ho.
+
+### 2. Simple Example (MDN Style)
+
+```js
+function init() {
+  let name = "Mozilla";      // name is a local variable created by init
+
+  function displayName() {   // displayName() is the inner function
+    console.log(name);       // inner function uses variable from outer scope
+  }
+
+  return displayName;
+}
+
+const myFunc = init();
+myFunc();   // "Mozilla"
+```
+
+Yahan `displayName()` ne `name` variable ko **close over** (bandh liya) hai.
+
+### 3. Practical & Powerful Examples
+
+**Example 1: Counter using Closure**
+
+```js
+function makeCounter() {
+  let count = 0;
+
+  return function() {
+    count++;
+    return count;
+  };
+}
+
+const counter = makeCounter();
+
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+```
+
+**Example 2: Private Variables (Data Encapsulation)**
+
+```js
+function createBankAccount(initialBalance) {
+  let balance = initialBalance;     // Private variable
+
+  return {
+    deposit(amount) {
+      balance += amount;
+      return balance;
+    },
+    withdraw(amount) {
+      if (amount > balance) return "Insufficient funds";
+      balance -= amount;
+      return balance;
+    },
+    getBalance() {
+      return balance;
+    }
+  };
+}
+
+const account = createBankAccount(1000);
+account.deposit(500);     // 1500
+account.withdraw(200);    // 1300
+console.log(account.getBalance()); // 1300
+```
+
+**Example 3: Event Handlers**
+
+```js
+function setupButton() {
+  let count = 0;
+
+  document.getElementById('btn').addEventListener('click', function() {
+    count++;
+    console.log(`Button clicked ${count} times`);
+  });
+}
+```
+
+### 4. Important Concepts from MDN
+
+- **Lexical Scoping**: Function apne definition ke outer scope ko yaad rakhta hai (call site se nahi).
+- **Every function has a closure**: Har function technically ek closure hai.
+- **Memory Efficiency**: Closures variables ko memory mein rakhte hain jab tak function reference exist karta hai.
+- **Garbage Collection**: Jab inner function ka reference delete ho jata hai, tab outer variables bhi garbage collect ho sakte hain.
+
+### 5. Common Gotchas
+
+**Gotcha 1: Loop + Closures (Classic Bug)**
+
+```js
+// Wrong (var use karne se)
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 1000);   // 3 3 3
+}
+
+// Correct (let use karo)
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 1000);   // 0 1 2
+}
+```
+
+**Gotcha 2: Shared Mutable State**
+
+```js
+function createHamsters() {
+  const stomach = [];
+
+  return {
+    eat(food) { stomach.push(food); },
+    getStomach() { return stomach; }
+  };
+}
+```
+
+→ Dono hamsters same `stomach` array share kar rahe honge.
+
+### 6. When to Use Closures?
+
+- Private variables aur methods banana
+- State maintain karna (counter, cache, etc.)
+- Event listeners aur callbacks
+- Function factories
+- Module pattern (IIFE + closure)
+
+### Final Summary (MDN Style)
+
+- Closure = Function + Lexical Environment
+- Inner functions outer variables ko “remember” kar sakte hain
+- Closures JavaScript mein **data privacy** aur **state management** ke liye bohot powerful hain
+- Modern JavaScript mein `let`/`const` + closures = clean aur safe code
+
+**Ab aapke paas hai:**
+- Scope
+- `this`
+- Prototypes
+- Closures (Wes Bos + MDN dono)
