@@ -1,0 +1,61 @@
+### Font Details (Asan Summary)
+
+| Item                  | Details |
+|-----------------------|--------|
+| **Font Name**         | **Norse** (Regular + Bold) |
+| **Designer**          | Joël Carrouché |
+| **Style**             | Viking / Runic inspired (Nordic runes jaisa look) |
+| **Best For**          | Pagan, fantasy, Viking theme, Valhalla cards, Odin Project sidebar logo |
+| **License**           | **100% Free** for personal **and commercial** use |
+| **Special Feature**   | Full Runic alphabet (Unicode support) – bohot badass hai |
+| **Release Year**      | ~2010-2011 |
+
+**Why it looks so good in Odin Form?**  
+- Strong, bold, ancient Viking feel deta hai  
+- Dark background (fern image) pe white text mein bohot sundar dikhta hai  
+- Heading aur logo ke liye perfect weight aur style
+
+### How to Use in Your Odin Project (Recommended Way)
+
+#### 1. Best & Easiest Method: Download + Self-host
+
+1. Font download karo (free):
+   - Official: https://www.joelcarrouche.com/fonts/norse
+   - Alternative safe links: FontSpace, 1001Fonts, or cdnfonts.com/norse.font
+
+2. Files extract karo → `Norse-Regular.otf` aur `Norse-Bold.otf` (ya .ttf)
+
+3. Project folder mein ek `fonts` folder banao aur dono files wahan daal do.
+
+#### 2. CSS Code (@font-face)
+
+```css
+@font-face {
+  font-family: 'Norse';
+  src: url('fonts/Norse-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Norse';
+  src: url('fonts/Norse-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+```
+
+#### 3. Apply in Sidebar (Odin Project Style)
+
+```css
+.sidebar .logo {
+  font-family: 'Norse', sans-serif;
+  font-size: 6rem;           /* Adjust according to your image */
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  letter-spacing: 4px;
+  line-height: 1;
+}

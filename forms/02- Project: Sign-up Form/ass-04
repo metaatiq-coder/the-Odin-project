@@ -1,0 +1,49 @@
+### Image Details
+- **File Name**: `odin-lined.png`
+- **Style**: Black outline (lined/stroke) version of the Odin logo
+- **Design**: Stylized "ODIN" text in a bold, Viking/Norse-inspired font with clean black lines on transparent background
+- **Purpose**: Left sidebar mein **logo** ke roop mein use hota hai (Unsplash fern image ke upar white color mein ya dark overlay ke saath)
+- **Why "lined"?** Yeh solid fill version nahi, sirf outline (stroke) wala clean version hai taaki dark/light backgrounds pe achhe se dikhe aur text shadow ke saath sundar lage.
+
+### How to Use in Your Project (Recommended)
+
+#### 1. HTML (Sidebar mein logo)
+```html
+<div class="sidebar">
+  <img src="imgs/odin-lined.png" alt="Odin" class="logo">
+  
+  <!-- Optional tagline -->
+  <p class="tagline">This is not a real online service.<br>You won't be able to log in.</p>
+</div>
+```
+
+#### 2. Best CSS for Logo (Norse feel ke saath)
+
+```css
+.sidebar {
+  background: url('https://unsplash.com/photos/25xggax4bSA/download?force=true') center/cover no-repeat;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.logo {
+  width: 180px;           /* Adjust size as needed */
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));  /* Depth ke liye */
+  z-index: 2;
+}
+
+/* Agar aap Norse font + text logo chahte ho to yeh use karo (optional) */
+.logo-text {
+  font-family: 'Norse', sans-serif;
+  font-size: 5.5rem;
+  font-weight: bold;
+  letter-spacing: 6px;
+  color: white;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+  margin-top: 20px;
+}

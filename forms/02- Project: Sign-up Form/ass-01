@@ -1,0 +1,63 @@
+### Overall Layout (Design Overview)
+- **Left Side**: Ek badi background image (dark overlay ke saath) + logo + tagline (e.g., “This is not a real online service…”)
+- **Right Side**: White background mein sign-up form
+- Form ke upar heading: “Create your account” or similar
+- Form fields vertically stacked
+- Bottom mein “Already have an account? Log in” link
+- Modern, clean look with subtle shadows aur nice typography
+
+### Form Fields (Exactly jaise design mein)
+
+| Field / Section                  | Type                  | Notes / Requirements |
+|----------------------------------|-----------------------|----------------------|
+| **First Name**                   | Text input            | Required |
+| **Last Name**                    | Text input            | Required |
+| **Email**                        | Email input           | Required, use `type="email"` |
+| **Phone Number**                 | Tel input             | Use `type="tel"` |
+| **Password**                     | Password input        | Required |
+| **Confirm Password**             | Password input        | Required, match with password |
+| **Create Account**               | Submit button         | Big green/blue button |
+| **Already have an account?**     | Link                  | “Log in” text as link |
+
+### HTML Structure Suggestion (Recommended)
+
+```html
+<div class="container">
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <img src="background.jpg" alt="">
+    <div class="overlay">
+      <img src="logo.png" alt="Odin Logo">
+      <p>Some catchy text...</p>
+    </div>
+  </div>
+
+  <!-- Right Form Area -->
+  <div class="form-area">
+    <h1>Create your account</h1>
+    <form>
+      <div class="form-row">
+        <label>First Name</label>
+        <input type="text" required>
+      </div>
+      <!-- Similarly for other fields -->
+      
+      <button type="submit">Create Account</button>
+    </form>
+    <p>Already have an account? <a href="#">Log in</a></p>
+  </div>
+</div>
+```
+
+### CSS Key Techniques (Jo Is Project Mein Use Hote Hain)
+
+| Technique                        | Kya Use Karo?                                      | Why Important? |
+|----------------------------------|----------------------------------------------------|----------------|
+| **Flexbox**                      | Main container ko split karne ke liye              | Left image + right form side-by-side |
+| **Background Image + Overlay**   | `background-image` + dark semi-transparent layer   | Text readable banane ke liye |
+| **Form Styling**                 | `padding`, `border-radius`, `box-shadow`, `:focus` | Clean & modern look |
+| **Custom Properties**            | `--primary-color`, `--spacing` etc.                | Easy to maintain |
+| **Responsive**                   | Media queries (mobile pe stack ho jaye)            | Good practice |
+| **Password Match Check**         | JavaScript se (optional but recommended)           | Real validation feel |
+| **Error States**                 | `:invalid`, `:valid`, custom red border            | UX improvement |
+
